@@ -1,0 +1,4313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gary A Longoria</title>
+
+<style>
+    :root{
+      --bg:#434242;
+      --accent:#d5dad9;
+      --muted:#9aa4b2;
+    }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{position:fixed;width:100%;height:100%;overflow:hidden;background:linear-gradient(180deg,#520644 0%,var(--bg) 100%)}
+
+/* ---------- SCENE ---------- */
+#scene{
+    position:relative;
+    width:100%;
+    height:100%;
+    
+}
+
+/* ---------- CINEMATIC BACKGROUND ---------- */
+#bgVideo{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-10;
+  opacity: .2;
+}
+/* ---------- OPENING TV VIDEO ---------- */
+
+#tv {
+  position: absolute;
+  opacity: .5;
+  top: 0;
+  margin-left:-420px;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  z-index: 1000;
+
+  mix-blend-mode: difference;
+
+  
+
+  display: none;
+  -webkit-mask-image: linear-gradient(to right, 
+      black 30%, 
+      transparent 70%);
+  mask-image: linear-gradient(to right, 
+      black 30%, 
+      transparent 70%);
+
+
+}
+
+
+/* ---------- LOGO ---------- */
+
+
+#logo{
+    position:absolute;
+    top:80px;right:90px;
+    width:140px;
+  
+    scale: 1.4;
+    transform:rotate(-180deg);
+    animation:logoIn 2s ease forwards;
+    z-index:30;
+}
+@keyframes logoIn{to{opacity:1;transform:rotate(0)}}
+
+/* ---------- CENTER ---------- */
+#center{
+    position:absolute;
+    top:55%;
+    left:80%;
+    transform:translate(-50%,-50%);
+    width:420px;height:420px;
+    z-index:40;
+    
+}
+
+.float{
+    position:absolute;
+    width:160px;
+    cursor:pointer;
+    
+}
+#fl1{
+    transform:translateX(-50%);
+    scale: .7;
+    margin-left: 300px;
+    margin-top: 0px;
+
+}
+#fl2{
+    
+    margin-left: 150px;
+    margin-top: 50px;
+    scale: .7;
+    transform: rotate(30deg);
+}
+#fl3{
+    margin-top: -50px;
+    margin-left: 160px;
+    transform: rotate(90deg);
+    scale: .7;
+    
+}
+
+
+/* ---------- FLOW ---------- */
+.flow{
+    position:absolute;
+    margin-top: -50px;
+    margin-left: 320px;
+    transform:translateX(-50%);
+    width:160px;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:50;
+    scale: 1.2;
+}
+.flow.active{opacity:1}
+
+#flow2{
+    position:absolute;
+    margin-top: 100px;
+    margin-left: 370px;
+    
+    
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:60;
+    scale: 2;
+}
+#flow2.active{opacity:1}
+
+#flow3{
+    position:absolute;
+    margin-left: 120px;
+    margin-top: -140px;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:70;
+    scale: 2;
+    transform: rotate(15deg);
+}
+#flow3.active{opacity:1}
+
+/* ---------- MENU ---------- */
+#menu{
+    position:absolute;
+    bottom: 100px;
+    right:900px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+    z-index:300;
+    scale: 1;
+    visibility: hidden;
+    
+}
+#menu.active{
+    opacity:1;
+    pointer-events:auto;
+    visibility: visible;
+}
+.menu-btn{width:160px;cursor:pointer}
+
+#menu2{
+    position:absolute;
+    bottom:600px;
+    right:700px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+    z-index:9000;
+    scale:1.2;
+    transform: rotate(-15deg);
+    
+}
+#menu2.active{opacity:1;pointer-events:auto}
+.menu2-btn{width:160px;cursor:pointer}
+
+#cache{
+    position:absolute;
+    bottom:100px;
+    right:100px;
+    display:flex;
+    flex-direction:column;
+    
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+    z-index:80;
+    scale:1; 
+    
+}
+
+
+                                /* ---------- GATHER BUTTONS---------- */
+
+#diazbutton{
+    position: absolute;
+    scale:.5;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 65px;
+    margin-top: 160px;
+    z-index: 10;
+}
+#diazbutton:hover{
+    transform: scale(2);
+    
+}
+
+#blackiebutton{
+    position: absolute;
+    z-index: 20;
+    scale: .5;
+    margin-left: 200px;
+    margin-top: -60px;
+    transition: transform 0.3s ease-in-out;
+}
+#blackiebutton:hover{
+    transform: scale(2);
+}
+#alexisbutton{
+    position: absolute;
+    z-index: 30;
+    scale: .5;
+    margin-left: 145px;
+    margin-top: 180px;
+     transition: transform 0.3s ease-in-out;
+}
+#alexisbutton:hover{
+    transform: scale(2);
+}
+#jackbutton{
+    position: absolute;
+    z-index: 40;
+    scale: .5;
+    margin-left: 100px;
+    margin-top: 0px;
+     transition: transform 0.3s ease-in-out; 
+}
+#jackbutton:hover{
+    transform: scale(2);
+}
+#longoriabutton{
+    position: absolute;
+    scale:.5;
+    margin-left: 180px;
+    margin-top: 20px;
+    z-index: 50;
+     transition: transform 0.3s ease-in-out;
+
+}
+#longoriabutton:hover{
+    transform: scale(2);
+}
+#prestinbutton{
+    position: absolute;
+    z-index: 90;
+    scale: .5;
+    margin-left: 120px;
+    margin-top: -80px;
+     transition: transform 0.3s ease-in-out; 
+}
+#prestinbutton:hover{
+    transform: scale(2);
+}
+#prestin{
+  scale:.7;
+  margin-top: 250px;
+  margin-left: 100px;
+}
+#natebutton{
+    position: absolute;
+    z-index: 100;
+    scale: .5;
+    margin-left: 80px;
+    margin-top: 80px;
+     transition: transform 0.3s ease-in-out; 
+}
+#natebutton:hover{
+    transform: scale(2);
+}
+#franzbutton{
+  position: absolute;
+    z-index: 110;
+    scale: .45;
+    margin-left: 40px;
+    margin-top: 240px;
+    transition: transform 0.3s ease-in-out; 
+}
+#franzbutton:hover{
+  transform: scale(2);
+}
+#sommerbutton{
+  position: absolute;
+    z-index: 120;
+    scale: .5;
+    margin-left: 120px;
+    margin-top: 260px;
+    transition: transform 0.3s ease-in-out; 
+}
+#sommerbutton:hover{
+  transform: scale(2);
+}
+#derrikbutton{
+  position: absolute;
+    z-index: 130;
+    scale: .6;
+    margin-left: 105px;
+    margin-top: 350px;
+    transition: transform 0.3s ease-in-out; 
+}
+#derrikbutton:hover{
+  transform: scale(2);
+}
+#robbutton{
+  position: absolute;
+    z-index: 140;
+    scale: .6;
+    margin-left: 15px;
+    margin-top: 325px;
+    transition: transform 0.3s ease-in-out; 
+}
+#robbutton:hover{
+  transform: scale(2);
+}
+#connorbutton{
+  position: absolute;
+    z-index: 150;
+    scale: .5;
+    margin-left: -5px;
+    margin-top: 415px;
+    transition: transform 0.3s ease-in-out; 
+}
+#connorbutton:hover{
+  transform: scale(2);
+}
+#head{
+    position: absolute;
+    z-index: 10;
+    scale: .6;
+    margin-left: 30px;
+    margin-bottom: -60px;
+    transform: rotate(30deg);
+    opacity: .8;
+    
+    
+
+}
+#head:hover{
+    transform: scale(.9);
+}
+#believe{
+    scale: .5;
+    position: absolute;
+    z-index: 20;
+    margin-left: 90px;
+    margin-top: 100px;
+    transform: rotate(30deg);
+    opacity: .8;
+    
+}
+
+#design{
+    position: absolute;
+    z-index: 30;
+    scale: .5;
+    margin-left: 0px;
+    margin-top: 150px;
+    opacity: .8;
+
+    
+    
+}
+
+#projects{
+    position: absolute;
+    z-index: 40;
+    scale: .5;
+    scale: .5;
+    margin-left: 20px;
+    margin-top: 250px;
+    opacity: .8;
+    
+    
+    
+}
+/* ---------- CAROUSEL ---------- */
+#carousel{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0);
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:1;
+}
+
+#carousel.active{display:flex}
+#carousel img,
+#carousel video{
+    max-width:90vw;
+    max-height:90vh;
+    object-fit:contain;
+}
+#carousel > img,
+#carousel > video{
+  position:relative;
+  z-index:1;
+}
+
+
+
+.nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:32px;
+    color:white;
+    cursor:pointer;
+}
+#prev{left:200px}
+#next{right:250px}
+.overlay{
+  display:none;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.overlay.active{
+  display:flex;
+}
+
+#overlayLayer{
+    position:absolute;
+    inset:0;
+
+    z-index:8800;
+
+    pointer-events:none;
+}
+
+#overlayLayer .overlay{
+    pointer-events:auto;
+}
+
+
+
+
+
+#mediaLayer{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:-1;
+}
+
+#mediaLayer img,
+#mediaLayer video{
+    display:block;
+    opacity:1;
+    visibility:visible;
+
+    max-width:80vw;
+    max-height:80vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+
+    pointer-events:none;
+}
+
+
+
+
+.social-btn{
+  width: 40px;
+  
+  
+  
+  cursor: pointer;
+}
+.nav{
+  pointer-events: auto;
+}
+#diazOverlay{
+ 
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  left:500px;
+  top:350px;
+  scale:1.2;
+}
+#instadiaz{
+ 
+  scale: .3;
+  position: absolute;
+  z-index: 10;
+  margin-left: 220px;
+  top:300px;
+
+  
+}
+#aclogo{
+    position: absolute;
+    z-index: 20;
+    scale: .25;
+    left:100px;
+    bottom: -80px;
+    
+    
+    
+}
+#mcjlogo{
+ 
+  position: absolute;
+  z-index: 20;
+  scale: .25;
+  left: 150px;
+  top:200px ;
+   
+    
+}
+#instajack{
+  position: absolute;
+  z-index: 30;
+  scale: .25;
+  left: 225px;
+  top:350px ;
+}
+#cloudlogoblack{
+    position: absolute;
+    margin-left:300px;
+    margin-top: 80px;
+    scale:.5;
+    
+
+    z-index: 30;
+    
+    
+    
+ 
+
+}
+#spotyblack{
+    position: absolute;
+    scale: .5;
+    left:300px;
+    top:450px;
+  
+  
+    z-index: 20;
+    
+}
+#blackiepng{
+  position: absolute;
+    scale: 1.5;
+    left:200px;
+    top:130px;
+  
+  
+    z-index: 10;
+    
+}
+#blackieinsta{
+  position: absolute;
+  z-index: 2000;
+  scale: .5;
+  left:325px;
+  top:345px;
+}
+
+
+#blackieOverlay{
+  
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  margin-left: -300px;
+  scale: 1.2;
+}
+#blackiename{
+  position: absolute;
+  scale: .3;
+  z-index: 2000;
+  left: 300px;
+  top: 300px;
+  opacity: .5;
+}
+
+#jackOverlay{
+  scale:1;
+  margin-top: -50px;
+  margin-left: -280px;
+}
+#jackgif{
+  opacity:.9;
+  scale: 1.3;
+
+}
+#alexisOverlay{
+  height: 500px;
+  width: 500;
+  align-items: center;
+  margin-left: -250px;
+  margin-top: -100px;
+
+  scale: 1;
+  
+
+  
+}
+#alexisgif{
+
+      scale: 2;
+      
+     
+      
+      opacity:.9;
+}
+#instaalexis{
+  
+  scale: .3;
+  position: absolute;
+  z-index: 10;
+  margin-left: 60px;
+  top:400px;
+}
+#spotyalexis{
+  position: absolute;
+  z-index: 20;
+ 
+  scale: .4;
+}
+#dbl{
+  position: absolute;
+  z-index: 30;
+  scale: .3;
+  margin-top: 200px;
+  margin-left: 50px;
+  
+
+}
+#instalong{
+  position: absolute;
+  z-index: 30;
+  scale: .3;
+  
+  margin-left: 200px;
+  margin-top: 190px;
+}
+#spotylong{
+   scale: .4;
+   position:absolute;
+   left:175px;
+   top:550px;
+  
+   z-index: 10;
+  
+}
+
+#mattname{
+  position: absolute;
+  z-index: 20;
+  scale:.5;
+  left:180px;
+  top:520px;
+}
+#longOverlay{
+ 
+  align-items: center;
+  scale:1.3;
+  left:100px;
+  bottom: -300px;
+
+  
+
+}
+#longpng{
+  position: absolute;
+  top:100px;
+}
+#mattgif{
+  position: absolute;
+  z-index: 1;
+
+
+
+
+
+}
+#wedbutton{
+    position: absolute;
+    z-index: 60;
+    scale: .5;
+    margin-left: 170px;
+    margin-top: 420px;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(15deg); 
+}
+#wedbutton:hover{
+    transform: scale(1.5);
+}
+#forumbutton{
+    position: absolute;
+    z-index: 70;
+    scale: .4;
+    margin-left: 200px;
+    margin-top: 350px;
+     transition: transform 0.3s ease-in-out;
+     transform: rotate(10deg); 
+}
+#forumbutton:hover{
+    transform: scale(1.5);
+}
+#andrewbutton{
+    position: absolute;
+    z-index: 60;
+    scale: .5;
+    margin-left: 160px;
+    margin-top: 100px;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(15deg); 
+}
+#andrewbutton:hover{
+    transform: scale(1.5);
+}
+#andrewOverlay{
+  position: absolute;
+ 
+  height:500px;
+  width:500px;
+  margin-left: -400px;
+
+}
+#andrewpng{
+  position: absolute;
+  scale:1.7;
+  left:150px;
+  bottom: -50px;
+}
+#andrewname{
+  position: absolute;
+  scale:.5;
+  left:400px;
+  top:130px;
+  z-index: 500;
+}
+#andrewinsta{
+  position: absolute;
+  z-index: 100;
+  scale:.3;
+  left:350px;
+  top:105px;
+}
+#togmail{
+  scale: .15;
+  margin-top: 200px;
+  margin-left: 145px;
+  opacity: 0;
+
+ 
+  
+}
+#togmail:hover{
+    transform: scale(1.5);
+}
+
+
+#instanate{
+  position: absolute;
+  z-index: 30;
+  scale: .4;
+  
+  margin-left: 220px;
+  margin-top: 150px;
+ 
+}
+
+#nateOverlay{
+  margin-left: -550px;
+  margin-top: -50px;
+  scale: 1;
+
+  align-items: center;
+}
+
+#natename{
+  position: absolute;
+  scale:.5;
+  left:200px;
+  top:100px;
+  z-index: 500;
+}
+#nategif{
+  position: absolute;
+  z-index: 1;
+
+ 
+ 
+  opacity: .7;
+ 
+}
+#instaprestin{
+  position: absolute;
+  z-index: 30;
+  scale: .5;
+  left:450px;
+  top:500px;
+  
+}
+#flowerchild{
+   position: absolute;
+  z-index: 40;
+  scale: .5;
+  left:420px;
+  top:580px;
+}
+#prestin{
+  position: absolute;
+  z-index: 10;
+  scale: 1;
+  top:-100px;
+  left:140px;
+  opacity: .9;
+
+ 
+  z-index: 10;
+  
+}
+
+#prestinOverlay{
+ 
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  margin-left: -480px;
+  margin-top: -250px;
+  scale:1;
+}
+#andrew{
+  
+  scale:2;
+}
+#andrewOverlay{
+  margin-bottom: -30px;
+  position: absolute;
+}
+#cache2{
+  position: absolute;
+  z-index: -200;
+  margin-left: -1200px;
+  margin-top: -200px;
+  opacity: .5;
+  scale: 1.1;
+  
+}
+
+
+#menu3{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+
+    right:300px;
+    top:0px;
+
+    width:1000px;
+    height:1000px;
+
+    z-index:7000;
+}
+
+#menu3.active{
+    opacity:1;
+    pointer-events:auto;
+}
+#insanity{
+    scale:1.2;
+    position:absolute;
+    z-index:7100;
+    top:50px;
+}
+
+#storybook{
+    position:absolute;
+    margin-left:-830px;
+    margin-top:-420px;
+
+    z-index:7200;
+
+    scale:.6;
+    transform:rotate(15deg);
+
+    -webkit-mask-image:linear-gradient(
+        to right,
+        black 80%,
+        transparent 100%
+    );
+
+    mask-image:linear-gradient(
+        to right,
+        black 80%,
+        transparent 100%
+    );
+}
+
+/* ---------- MUSIC TOGGLE ---------- */
+#musicToggle{
+  position:absolute;
+  margin-left:240px;     
+  margin-top:230px;      
+  font-size:28px;
+  color:white;
+  cursor:pointer;
+  opacity:0;            
+  transition:opacity .4s ease;
+  z-index:150;
+  user-select:none;
+  scale: 1.5;
+}
+
+/* ACTIVE STATE */
+#musicToggle.active{
+  opacity:0.5;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+#musicToggle:hover{
+    transform: scale(1.5);
+}
+#enterGate{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(180deg,#520644 0%,var(--bg) 100%);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:opacity 1s ease;
+}
+
+#enterButton{
+color:white;
+font-size:22px;
+letter-spacing:8px;
+cursor:pointer;
+opacity:.85;
+scale: .6;
+margin-top: -200px;
+
+transition:all .6s ease;
+}
+
+#enterButton:hover{
+opacity:1;
+scale: .6;
+transform:scale(1.1);
+}
+#garyenterlogo{
+cursor:pointer;
+display:block;
+}
+#gather{
+  
+  scale: .8;
+  margin-right: -400px;
+
+  
+}
+
+
+
+
+@keyframes thumbBounce {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes overlayBounce {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+
+/* Slow pulse + glow */
+
+
+#gcachehold{
+
+  scale: .8;
+   transform: rotate(-15deg); 
+}
+
+.small-btn{
+  position: absolute;
+  top: 800px;
+  left: -160px;
+  
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  scale:.25;
+  z-index: 1000;
+  opacity: .7;
+}
+.small-btn img{
+  transition: transform 0.25s ease;
+}
+
+.small-btn img:hover{
+  transform: scale(1.3);
+}
+.small-btn{
+  display:flex;
+  gap:10px;
+}
+.thumbs{
+  display:none;
+  
+}
+
+.thumbs.active{
+  display:grid;
+  grid-template-columns: repeat(3, 150px);
+  gap:30px;
+
+  transform: scale(.5);
+
+  margin-bottom: -275px;
+  
+}
+.thumb:hover{
+  scale:1.2;
+}
+#franzpng{
+  position: absolute;
+  scale:.8;
+  z-index: 1;
+  left:-20px;
+  
+}
+#franzname{
+  position: absolute;
+  z-index: 10;
+  scale:.4;
+  top:300px;
+  left:410px;
+}
+
+#franzinsta{
+  position: absolute;
+  z-index: 40;
+  scale:.3;
+  left:435px;
+  top:315px;
+}
+#franztik{
+  position: absolute;
+  z-index: 50;
+  scale: .4;
+  left:465px;
+  top:390px;
+  opacity: .8;
+}
+
+#franzOverlay{
+  left:0px;
+  top:0px;
+}
+
+#sommerOverlay{
+  left:400px;
+}
+#sommerinsta{
+  scale:.5;
+  position: absolute;
+  z-index: 10;
+  top: 225px;
+  left: 325px;
+}
+#sommerpng{
+  scale: 1.5;
+  opacity: 1;
+}
+#somername{
+  position: absolute;
+  z-index: 20;
+  scale: .5;
+  left: 300px;
+  top: 200px;
+}
+
+#bunny{
+  position: absolute;
+  z-index: 100;
+  scale: .5;
+  left: 305px;
+  top: 300px;
+}
+#robOverlay{
+  left: 500px;
+  top: 400px;
+  scale: 1.2;
+}
+#robpng{
+  scale: 1.3;
+  top: 0px;
+  opacity: .5;
+}
+#robname{
+  position: absolute;
+  z-index: 20;
+  scale: 1;
+  left: 190px;
+  top: 250px;
+
+}
+#robinsta{
+    scale:.5;
+  position: absolute;
+  z-index: 10;
+  top: 300px;
+  left: 220px;
+
+}
+#vessel{
+  position: absolute;
+  z-index: 100;
+  scale: .15;
+  left: 105px;
+  top: 280px;
+}
+
+#derrikOverlay{
+  left:450px;
+  top:300px;
+}
+#derrikinsta{
+  position: absolute;
+  z-index: 10;
+    scale:.5;
+  position: absolute;
+  z-index: 10;
+  top: 320px;
+  left: 210px;
+
+}
+#derrikname{
+  position: absolute;
+  z-index: 20;
+  scale: .5;
+  top: 300px;
+  left: 185px;
+}
+
+#connorOverlay{
+  left:450px;
+  top:300px;
+
+}
+#connorinsta{
+  position: absolute;
+  scale: .5;
+  left:255px;
+  bottom: -100px;
+  z-index: 10;
+  
+}
+#connorname{
+  position: absolute;
+  scale: .5;
+  left: 230px;
+  top: 500px;
+}
+
+#rubenname{
+  scale: .5;
+  position: absolute;
+  left: 200px;
+  top: 370px;
+}
+#alexisname{
+  position: absolute;
+  scale: .5;
+  left: 35px;
+  top: 370px;
+  z-index: 100;
+}
+
+
+#mehmeibutton{
+  position: absolute;
+    z-index: 150;
+    scale: .5;
+    margin-left: 80px;
+    margin-top: 435px;
+    transition: transform 0.3s ease-in-out; 
+}
+#mehmeibutton:hover{
+  transform: scale(2);
+}
+#mehmeiOverlay{
+  left: 450px;
+  top:350px;
+}
+#melbutton{
+  position: absolute;
+  scale: .5;
+ z-index: 160;
+    scale: .5;
+    margin-left: 60px;
+    margin-top: 520px;
+    transition: transform 0.3s ease-in-out; 
+}
+#melbutton:hover{
+  transform: scale(2);
+}
+#mehmeiinsta{
+  position: absolute;
+  scale: .5;
+  top:450px;
+  left: 255px;
+}
+#mehmeiname{
+  position: absolute;
+  scale: .5;
+  top: 400px;
+  left: 230px;
+}
+#melinsta{
+  position: absolute;
+  scale: .5;
+  left: 225px;
+  top: 450px;
+  z-index: 10;
+}
+#melname{
+  position: absolute;
+  scale: .5;
+  left: 200px;
+  top: 400px;
+}
+#melOverlay{
+  position: absolute;
+  left: 450px;
+  
+  top: 300px;
+}
+
+#andrebutton{
+  position: absolute;
+  scale: .5;
+ z-index: 160;
+    scale: .5;
+    margin-left: -25px;
+    margin-top: 500px;
+    transition: transform 0.3s ease-in-out; 
+}
+#andrebutton:hover{
+  transform: scale(2);
+}
+#andrename{
+  position: absolute;
+  scale: .5;
+  top: 400px;
+  left: 200px;
+}
+#andreinsta{
+  position: absolute;
+  scale: .5;
+  top: 450px;
+  left: 220px;
+}
+#andreOverlay{
+  left: 470px;
+  top: 300px;
+}
+
+#forumOverlay{
+  left: 500px;
+}
+#robertobutton{
+  position: absolute;
+  scale: .45;
+  top: -40px;
+  left: 280px;
+   transition: transform 0.3s ease-in-out; 
+
+}
+#robertobutton:hover{
+  transform: scale(2);
+}
+#robertoname{
+  position: absolute;
+  scale: .5;
+  top: 300px;
+  left: 100px;
+
+  z-index: 10;
+}
+#robertoinsta{
+  position: absolute;
+  scale: .5;
+  top: 350px;
+  left: 120px;
+  z-index: 20;
+}
+#robertoOverlay{
+  left: 450px;
+  top: 300px;
+  
+}
+#robertogif{
+  scale: 1.3;
+}
+#outlaw{
+  position: absolute;
+  
+  z-index: -50;
+  left:-500px;
+  top:0px;
+  scale:2;
+  transform: rotate(15deg);
+}
+#outlawname{
+  position: absolute;
+  scale: .5;
+  top: 300px;
+  left:-300px;
+  z-index: 1200;
+   transform: rotate(15deg);
+}
+
+
+
+#outlawCloseBtn{
+    position:absolute;
+    left:-250px;          /* centered under video */
+    top:400px;            /* below video */
+    z-index:2000;
+
+    padding:8px 18px;
+    border:none;
+    cursor:pointer;
+
+    background:rgba(0,0,0,0);
+    color:white;
+    font-size:14px;
+    letter-spacing:2px;
+    transform: rotate(15deg);
+
+    opacity:.8;
+}
+
+#outlawCloseBtn:hover{
+    opacity:1;
+}#outlawdiv{
+    position:relative;
+}
+#insanity{
+  scale: 1.8;
+  left: 100px;
+  
+  opacity: .2;
+ 
+}
+
+.cfths{
+  display:grid;
+  grid-template-columns: repeat(2, 150px);
+  gap:20px;
+  
+  
+  
+ 
+
+ 
+
+}
+.cfth:hover{
+  scale:1.2;
+ 
+}
+#creativeflow{
+  position: absolute;
+  z-index: 3000;
+  scale: .4;
+  margin-top: -530px;
+  margin-left:700px;
+}
+
+#insanityOverlay{
+  margin-left: 0px;
+  margin-top: 100px;
+  width: 838px;
+  height: 522px;
+  scale: 1.4;
+}
+#cf2lOverlay{
+  scale: 1.1;
+  margin-top: 35px;
+  margin-left:-150px;
+}
+#cf9Overlay{
+  scale: 1;
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf10Overlay{
+  scale: 1.2;
+  margin-top: 50px;
+  margin-left:-200px;
+}
+#cf11Overlay{
+  scale: 1;
+  margin-top: 0px;
+  margin-left:-150px;
+}
+#cf12Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf13Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf14Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf15Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf16Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf17Overlay{
+  
+  margin-top: 40px;
+  margin-left:-200px;
+  scale: 1.2;
+}
+#cf3Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf4Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf5Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf6Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf7Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+
+#cf8Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf18Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+
+#cf19Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#cf20Overlay{
+  
+  margin-top: 0px;
+  margin-left:-200px;
+}
+#box{
+  position: absolute;
+  scale: .4;
+  z-index: -5000;
+  top:60px;
+  margin-left: -270px;
+}
+#recordprisonBox{
+    position: absolute;
+  scale: .4;
+  z-index: -5000;
+  top:60px;
+  margin-left: -270px;
+}
+#recorddefaultBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 1;
+}
+#prison{
+  position: absolute;
+  scale: .4;
+  z-index: -4000;
+  top:60px;
+  margin-left: -270px;
+}
+#mgcover{
+  position: absolute;
+  scale: .4;
+  z-index: -3000;
+  top:260px;
+  margin-left: -150px;
+}
+#arrow{
+  position: absolute;
+  scale: .1;
+  z-index: 9000;
+  top:250px;
+  margin-left: -20px;
+  opacity: .8;
+}
+#records {
+  position: absolute;
+  z-index: 8000;
+  top: 0;
+  margin-left: 350px;
+
+  width: 1px;
+  height: 1px;
+}
+#records .record {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  width: 1px;
+  height: 1px;
+}
+
+#records .record.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+/*RECORD 1*/
+#recordprison #prison {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 6;
+}
+
+#recordprison #recordprisonBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+
+#recordprison #mgcover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+/*RECORD 2*/
+#recordhardlivin #recordblackieBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordhardlivin #blackiecover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordhardlivin #hardlivin {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+/*RECORD 3*/
+#recordhardlivin #recordblackieBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordhardlivin #blackiecover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordhardlivin #hardlivin {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+/*RECORD 4*/
+#recorddontcome #recordmagicBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recorddontcome #magiccover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recorddontcome #dontcome {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+/*RECORD 5*/
+#recordmove #recordmoveBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordmove #caravancover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordmove #move {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+/*RECORD 6*/
+#recordoutlaw #recordoutlawBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordoutlaw #natecover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordoutlaw #outlaw {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: 225px;
+  z-index: 5;
+}
+
+/*RECORD 7*/
+#recordoutside #recordoutsideBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordoutside #nate2cover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordoutside #outside {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+/*RECORD 8*/
+#recordxmas #recordxmasBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordxmas #diazcover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordxmas #xmas {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+/*RECORD 9*/
+#recordmaria #recordmariaBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordmaria #diazcover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordmaria #maria {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+
+/*RECORD 10*/
+#recordrainbow #recordrainbowBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordrainbow #mgcover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordrainbow #rainbow {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+/*RECORD 11*/
+#recordhero #recordgondolaBox {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 2;
+}
+#recordhero #gondolacover {
+  position: absolute;
+  scale: .4;
+  top: 260px;
+  margin-left: -150px;
+  z-index: 3;
+}
+#recordhero #hero {
+  position: absolute;
+  scale: .4;
+  top: 60px;
+  margin-left: -270px;
+  z-index: 5;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="enterGate">
+    <div id="enterButton">
+      <img src="assets/garyenterlogo.gif" id="garyenterlogo">
+    </div>
+</div>  
+
+<!-- AUDIO -->
+ 
+<audio id="ambient" loop>
+    <source src="assets/hero.mp3" type="audio/mpeg">
+</audio>
+
+<div id="scene">
+<video id="bgVideo" muted playsinline preload="none"></video>  
+
+
+  
+<img src="assets/logo.png" id="logo">
+
+
+
+
+<div id="center">
+<img src="assets/fl1.gif" id="fl1" class="float">
+
+<img src="assets/flow.gif" id="flow1" class="flow">
+
+
+<img src="assets/fl2.gif" id="fl2" class="float">
+<img src="assets/gather.gif" id="flow2" class="flow">
+<img src="assets/fl3.gif" id="fl3" class="float">
+<img src="assets/gcache.gif" id="flow3" class="flow">
+
+<div id="musicToggle">𝄞</div>
+<a href="mailto:garyalongoria@pm.me"class="ui-item">
+   <img src="assets/mail.png" id="togmail" class="togmail">
+</a>
+
+<div id="records">
+  <img src="assets/arrow.png" id="arrow" alt="Next record">
+
+  <!-- RECORD 01: DEFAULT -->
+  <div id="recorddefault" class="record active">
+
+  <img
+    src="assets/record1.png"
+    id="recorddefaultBox"
+    alt="Default record">
+
+</div>
+
+  <!-- RECORD 02: PRISON -->
+  <div id="recordprison"
+     class="record"
+     data-audio="assets/prison.mp3">
+    <img src="assets/prison.gif"
+         id="prison"
+         alt="Prison title">
+
+    <img src="assets/mgcover.png"
+         id="mgcover"
+         alt="Prison cover">
+
+    <img src="assets/record8.gif"
+         id="recordprisonBox"
+         alt="Prison record">
+  </div>
+
+   <!-- RECORD 03: HARDLIVIN -->
+  <div id="recordhardlivin"
+     class="record"
+     data-audio="assets/hardlivin.mp3">
+    <img src="assets/hardlivin.gif"
+         id="hardlivin"
+         alt="Hardlivin title">
+
+    <img src="assets/blackiecover.png"
+         id="blackiecover"
+         alt="Blackie cover">
+
+    <img src="assets/record2.gif"
+         id="recordblackieBox"
+         alt="Blackie record">
+  </div>
+
+   <!-- RECORD 04: DONT COME -->
+  <div id="recorddontcome"
+     class="record"
+     data-audio="assets/dontcome.mp3">
+    <img src="assets/dontcome.gif"
+         id="dontcome"
+         alt="Dontcome title">
+
+    <img src="assets/magiccover.png"
+         id="magiccover"
+         alt="Magic cover">
+
+    <img src="assets/record3.gif"
+         id="recordmagicBox"
+         alt="Magic record">
+  </div>
+
+    <!-- RECORD 05: MOVE TO LA -->
+  <div id="recordmove"
+     class="record"
+     data-audio="assets/movetola.mp3">
+    <img src="assets/move.gif"
+         id="move"
+         alt="Dontcome title">
+
+    <img src="assets/caravancover.png"
+         id="caravancover"
+         alt="Move cover">
+
+    <img src="assets/record4.gif"
+         id="recordmoveBox"
+         alt="Move record">
+  </div>
+  
+     <!-- RECORD 06: OUTLAW MAN -->
+  <div id="recordoutlaw"
+     class="record"
+     data-audio="assets/outlawman.mp3">
+    <img src="assets/outlaw.gif"
+         id="outlaw"
+         alt="Outlaw Man title">
+
+    <img src="assets/natepicoutlaw.png"
+         id="natecover"
+         alt="Nate cover">
+
+    <img src="assets/record5.gif"
+         id="recordoutlawBox"
+         alt="Outlaw record">
+  </div>
+
+       <!-- RECORD 07: OUTSIDE. OF TIME -->
+  <div id="recordoutside"
+     class="record"
+     data-audio="assets/outside.mp3">
+    <img src="assets/outside.gif"
+         id="outside"
+         alt="Outside title">
+
+    <img src="assets/natecover.png"
+         id="nate2cover"
+         alt="Nate2 cover">
+
+    <img src="assets/record6.gif"
+         id="recordoutsideBox"
+         alt="Outside record">
+  </div>
+
+         <!-- RECORD 08: CHRISTMAS -->
+  <div id="recordxmas"
+     class="record"
+     data-audio="assets/xmas.mp3">
+    <img src="assets/xmas.gif"
+         id="xmas"
+         alt="Xmas title">
+
+    <img src="assets/diazcover.png"
+         id="diazcover"
+         alt="Diaz cover">
+
+    <img src="assets/record2.gif"
+         id="recordxmasBox"
+         alt="Xmas record">
+  </div>
+
+           <!-- RECORD 09:MARIA BALLOON -->
+  <div id="recordmaria"
+     class="record"
+     data-audio="assets/maria.mp3">
+    <img src="assets/maria.gif"
+         id="maria"
+         alt="Maria title">
+
+    <img src="assets/diazcover.png"
+         id="diazcover"
+         alt="Diaz cover">
+
+    <img src="assets/record7.gif"
+         id="recordmariaBox"
+         alt="Maria record">
+  </div>
+
+
+             <!-- RECORD 10: RAINBOW OF FIRE -->
+  <div id="recordrainbow"
+     class="record"
+     data-audio="assets/rainbow.mp3">
+    <img src="assets/rainbow.gif"
+         id="rainbow"
+         alt="Rainbow title">
+
+    <img src="assets/mgcover.png"
+         id="mgcover"
+         alt="MG cover">
+
+    <img src="assets/record8.gif"
+         id="recordrainbowBox"
+         alt="Rainbow record">
+  </div>
+
+               <!-- RECORD 11: HERO -->
+  <div id="recordhero"
+     class="record"
+     data-audio="assets/hero.mp3">
+    <img src="assets/herotitle.gif"
+         id="hero"
+         alt="Hero title">
+
+    <img src="assets/gondolacover.png"
+         id="gondolacover"
+         alt="Gondola cover">
+
+    <img src="assets/record8.gif"
+         id="recordgondolaBox"
+         alt="Gondola record">
+  </div>
+
+</div>
+  
+  
+  
+  
+  
+  
+</div>
+
+
+<video
+    id="tv"
+    playsinline
+    preload="auto"
+></video>
+
+
+  
+
+
+
+</div>
+
+
+
+<div id="menu">
+
+  <div class="small-btn">
+      
+    
+    <img src="assets/galleryselectbutton.png" id="gsb1" class="menu-btn" data-gallery="1">
+    <img src="assets/galleryselectbutton.png" id="gsb2" class="menu-btn" data-gallery="2">
+    <img src="assets/galleryselectbutton.png" id="gsb3" class="menu-btn" data-gallery="3">
+    <img src="assets/galleryselectbutton.png" id="gsb4" class="menu-btn" data-gallery="4">
+    <img src="assets/galleryselectbutton.png" id="gsb5" class="menu-btn" data-gallery="5">
+    
+    
+   
+  </div>
+
+  <div class="thumbs" id="thumbs_1">
+    
+    <div class="thumb">
+       <img src="assets/th1_1.png" class="menu-btn" data-set="head">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_2.png" class="menu-btn" data-set="believe">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_3.png" class="menu-btn" data-set="th1_2">
+    </div>
+    
+    <div class="thumb">
+       <img src="assets/th1_4.png" class="menu-btn" data-set="th1_4">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_5.png" class="menu-btn" data-set="th1_5">
+    </div>
+   
+     <div class="thumb">
+       <img src="assets/th1_6.png" class="menu-btn" data-set="th1_6">
+    </div>
+    
+    <div class="thumb">
+       <img src="assets/th1_7.png" class="menu-btn" data-set="th1_7">
+    </div>
+   
+    <div class="thumb">
+       <img src="assets/th1_8.png" class="menu-btn" data-set="th1_8">
+    </div>
+    
+    <div class="thumb">
+       <img src="assets/th1_9.png" class="menu-btn" data-set="th1_9">
+    </div> 
+
+    <div class="thumb">
+       <img src="assets/th1_10.png" class="menu-btn" data-set="th1_10">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_11.png" class="menu-btn" data-set="th1_11">
+    </div>
+    
+    <div class="thumb">
+       <img src="assets/th1_12.png" class="menu-btn" data-set="th1_12">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_13.png" class="menu-btn" data-set="th1_13">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_14.png" class="menu-btn" data-set="th1_14">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_15.png" class="menu-btn" data-set="th1_15">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_16.png" class="menu-btn" data-set="th1_16">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_17.png" class="menu-btn" data-set="th1_17">
+    </div>
+
+    <div class="thumb">
+       <img src="assets/th1_18.png" class="menu-btn" data-set="th1_18">
+    </div>
+
+    
+
+  </div>
+
+  <div class="thumbs" id="thumbs_2">
+
+      <div class="thumb">
+        <img src="assets/th2_1.png" class="menu-btn" data-set="th2_1">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_2.png" class="menu-btn" data-set="th2_2">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_3.png" class="menu-btn" data-set="th2_3">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_4.png" class="menu-btn" data-set="th2_4">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_5.png" class="menu-btn" data-set="th2_5">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_6.png" class="menu-btn" data-set="th2_6">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_7.png" class="menu-btn" data-set="th2_7">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_8.png" class="menu-btn" data-set="th2_8">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_9.png" class="menu-btn" data-set="th2_9">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_10.png" class="menu-btn" data-set="th2_10">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_11.png" class="menu-btn" data-set="th2_11">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_12.png" class="menu-btn" data-set="th2_12">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_13.png" class="menu-btn" data-set="th2_13">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_14.png" class="menu-btn" data-set="th2_14">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_15.png" class="menu-btn" data-set="th2_15">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_16.png" class="menu-btn" data-set="th2_16">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_17.png" class="menu-btn" data-set="th2_17">
+      </div>
+
+      <div class="thumb">
+        <img src="assets/th2_18.png" class="menu-btn" data-set="th2_18">
+      </div>
+
+  </div> 
+
+  <div class="thumbs" id="thumbs_3">
+        
+        <div class="thumb">
+          <img src="assets/th3_1.png" class="menu-btn" data-set="th3_1">
+        </div>        
+        <div class="thumb">
+          <img src="assets/th3_2.png" class="menu-btn" data-set="th3_2">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_3.png" class="menu-btn" data-set="th3_3">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_4.png" class="menu-btn" data-set="th3_4">
+        </div>
+       
+         <div class="thumb">
+          <img src="assets/th3_5.png" class="menu-btn" data-set="th3_5">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_6.png" class="menu-btn" data-set="th3_6">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_7.png" class="menu-btn" data-set="th3_7">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_8.png" class="menu-btn" data-set="th3_8">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_9.png" class="menu-btn" data-set="th3_9">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_10.png" class="menu-btn" data-set="th3_10">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_11.png" class="menu-btn" data-set="th3_11">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_12.png" class="menu-btn" data-set="th3_12">
+        </div>
+         <div class="thumb">
+          <img src="assets/th3_13.png" class="menu-btn" data-set="th3_13">
+        </div>
+        <div class="thumb">
+          <img src="assets/th3_14.png" class="menu-btn" data-set="th3_14">
+        </div>
+        <div class="thumb">
+          <img src="assets/th3_15.png" class="menu-btn" data-set="th3_15">
+        </div>
+        <div class="thumb">
+          <img src="assets/th3_16.png" class="menu-btn" data-set="th3_16">
+        </div>
+        <div class="thumb">
+          <img src="assets/th3_17.png" class="menu-btn" data-set="th3_17">
+        </div>
+        <div class="thumb">
+          <img src="assets/th3_18.png" class="menu-btn" data-set="th3_18">
+        </div>
+   
+  </div>
+
+   <div class="thumbs" id="thumbs_4">
+        
+        <div class="thumb">
+          <img src="assets/th4_1.png" class="menu-btn" data-set="th4_1">
+        </div>        
+        <div class="thumb">
+          <img src="assets/th4_2.png" class="menu-btn" data-set="th4_2">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_3.png" class="menu-btn" data-set="th4_3">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_4.png" class="menu-btn" data-set="th4_4">
+        </div>
+       
+         <div class="thumb">
+          <img src="assets/th4_5.png" class="menu-btn" data-set="th4_5">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_6.png" class="menu-btn" data-set="th4_6">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_7.png" class="menu-btn" data-set="th4_7">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_8.png" class="menu-btn" data-set="th4_8">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_9.png" class="menu-btn" data-set="th4_9">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_10.png" class="menu-btn" data-set="th4_10">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_11.png" class="menu-btn" data-set="th4_11">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_12.png" class="menu-btn" data-set="th4_12">
+        </div>
+         <div class="thumb">
+          <img src="assets/th4_13.png" class="menu-btn" data-set="th4_13">
+        </div>
+        <div class="thumb">
+          <img src="assets/th4_14.png" class="menu-btn" data-set="th4_14">
+        </div>
+        <div class="thumb">
+          <img src="assets/th4_15.png" class="menu-btn" data-set="th4_15">
+        </div>
+        <div class="thumb">
+          <img src="assets/th4_16.png" class="menu-btn" data-set="th4_16">
+        </div>
+        <div class="thumb">
+          <img src="assets/th4_17.png" class="menu-btn" data-set="th4_17">
+        </div>
+        <div class="thumb">
+          <img src="assets/th4_18.png" class="menu-btn" data-set="th4_18">
+        </div>
+
+  </div>
+
+   <div class="thumbs" id="thumbs_5">
+        
+        <div class="thumb">
+          <img src="assets/th5_1.png" class="menu-btn" data-set="th5_1">
+        </div>        
+        <div class="thumb">
+          <img src="assets/th5_2.png" class="menu-btn" data-set="th5_2">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_3.png" class="menu-btn" data-set="th5_3">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_4.png" class="menu-btn" data-set="th5_4">
+        </div>
+       
+         <div class="thumb">
+          <img src="assets/th5_5.png" class="menu-btn" data-set="th5_5">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_6.png" class="menu-btn" data-set="th5_6">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_7.png" class="menu-btn" data-set="th5_7">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_8.png" class="menu-btn" data-set="th5_8">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_9.png" class="menu-btn" data-set="th5_9">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_10.png" class="menu-btn" data-set="th5_10">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_11.png" class="menu-btn" data-set="th5_11">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_12.png" class="menu-btn" data-set="th5_12">
+        </div>
+         <div class="thumb">
+          <img src="assets/th5_13.png" class="menu-btn" data-set="th5_13">
+        </div>
+        <div class="thumb">
+          <img src="assets/th5_14.png" class="menu-btn" data-set="th5_14">
+        </div>
+        <div class="thumb">
+          <img src="assets/th5_15.png" class="menu-btn" data-set="th5_15">
+        </div>
+        <div class="thumb">
+          <img src="assets/th5_16.png" class="menu-btn" data-set="th5_16">
+        </div>
+        <div class="thumb">
+          <img src="assets/th5_17.png" class="menu-btn" data-set="th5_17">
+        </div>
+        <div class="thumb">
+          <img src="assets/th5_18.png" class="menu-btn" data-set="th5_18">
+        </div>
+   </div>      
+</div>
+
+
+<div id="menu2">
+  <div id="gather">
+
+    <img src="assets/diazbutton.png" id="diazbutton" class="menu-btn" data-set="diaz">
+    <img src="assets/longoriabutton.png" id="longoriabutton" class="menu-btn" data-set="longoria">
+
+    <img src="assets/jackbutton.png" id="jackbutton" class="menu-btn" data-set="jack">
+    <img src="assets/alexisbutton.png" id="alexisbutton" class="menu-btn" data-set="alexis">
+    <img src="assets/blackiebutton.png" id="blackiebutton" class="menu-btn" data-set="blackie">
+    <a href="https://www.youtube.com/watch?v=97wNpiQnmJQ" target="_blank">
+            <img src="assets/wedding.png" id="wedbutton" alt="wedding">
+    </a>
+
+    <img src="assets/forum.png" id="forumbutton" class="menu-btn" data-set="forum">
+    <img src="assets/natebutton.png" id="natebutton" class="menu-btn" data-set="nate">
+    <img src="assets/prestonbutton.png" id="prestinbutton" class="menu-btn" data-set="prestin">
+    <img src="assets/andrewbutton.png" id="andrewbutton" class="menu-btn" data-set="andrew">
+    <img src="assets/franzbutton.png" id="franzbutton" class="menu-btn" data-set="franz">
+    <img src="assets/sommerbutton.png" id="sommerbutton" class="menu-btn" data-set="sommer">
+    <img src="assets/derrikbutton.png" id="derrikbutton" class="menu-btn" data-set="derrik">
+    <img src="assets/robbutton.png" id="robbutton" class="menu-btn" data-set="rob">
+    <img src="assets/connorbutton.png" id="connorbutton" class="menu-btn" data-set="connor">
+    <img src="assets/mehmeibutton.png" id="mehmeibutton" class="menu-btn" data-set="mehmei">
+    <img src="assets/melbutton.png" id="melbutton" class="menu-btn" data-set="mel">
+    <img src="assets/andrebutton.png" id="andrebutton" class="menu-btn" data-set="andre">
+     <img src="assets/robertobutton.png" id="robertobutton" class="menu-btn" data-set="roberto">
+ 
+
+    <div id="outlawdiv">
+
+    <img src="assets/outlawname.png" id="outlawname">
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@videojs/html/cdn/video.js"></script>
+
+    <video-player>
+      <video-skin id="outlaw">
+        <video id="outlawVideo" src="assets/outlaw.mp4" playsinline controls></video>
+      </video-skin>
+    </video-player>
+
+    <button id="outlawCloseBtn">close</button>
+
+</div>
+
+  </div>
+
+
+</div>
+
+<div id="menu3">
+  
+    <div class="cfths" id="creativeflow">
+        <div class="cfth">
+          <img src="assets/cfth_1.jpg" class="menu-btn" data-set="cfth_1">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_2.jpg" class="menu-btn" data-set="cfth_2">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_3.jpg" class="menu-btn" data-set="cfth_3">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_4.jpg" class="menu-btn" data-set="cfth_4">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_5.jpg" class="menu-btn" data-set="cfth_5">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_6.jpg" class="menu-btn" data-set="cfth_6">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_7.jpg" class="menu-btn" data-set="cfth_7">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_8.jpg" class="menu-btn" data-set="cfth_8">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_9.jpg" class="menu-btn" data-set="cfth_9">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_10.jpg" class="menu-btn" data-set="cfth_10">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_11.jpg" class="menu-btn" data-set="cfth_11">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_12.jpg" class="menu-btn" data-set="cfth_12">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_13.jpg" class="menu-btn" data-set="cfth_13">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_14.jpg" class="menu-btn" data-set="cfth_14">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_15.jpg" class="menu-btn" data-set="cfth_15">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_16.jpg" class="menu-btn" data-set="cfth_16">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_17.jpg" class="menu-btn" data-set="cfth_17">
+        </div>
+    
+        <div class="cfth">
+          <img src="assets/cfth_18.jpg" class="menu-btn" data-set="cfth_18">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_19.jpg" class="menu-btn" data-set="cfth_19">
+        </div>
+        <div class="cfth">
+          <img src="assets/cfth_20.jpg" class="menu-btn" data-set="cfth_20">
+        </div>
+    
+
+
+    </div>
+</div>
+
+
+<div id="carousel">
+
+  <div id="mediaLayer"></div>
+
+  <div class="overlay" id="diazOverlay">
+    <a href="https://www.instagram.com/r.m.diaz/" target="_blank">
+      <img src="assets/insta.png" id="instadiaz" alt="Instagram">
+    </a>
+    <a href="https://open.spotify.com/artist/2MdicVi9uN2pdDzE0ZhACG" target="_blank">
+      <img src="assets/aclogo.png" id="aclogo" alt="spotify">
+    </a>
+    <img src="assets/diaz.png" id="diaz">
+      <img src="assets/rubenname.png" id="rubenname">
+  </div>
+
+  <div class="overlay" id="jackOverlay">
+    <a href="https://www.instagram.com/jacklorang/?hl=en" target="_blank">
+        <img src="assets/insta.png" id="instajack" alt="Instagram">
+    </a>
+    <a href="https://open.spotify.com/artist/03FZXqhtHEqTNluN5XpZTh" target="_blank">
+        <img src="assets/mcjspot.png" id="mcjlogo" alt="spotify">
+    </a>
+    <img src="assets/jack.gif" id="jackgif">
+  </div>
+  <div class="overlay" id="blackieOverlay">
+    <a href="https://www.instagram.com/blackievalentino/" target="_blank">
+        <img src="assets/insta.png" id="blackieinsta">
+    </a>
+    <a href="https://www.soundcloud.com/blackie-valentino" target="_blank">
+        <img src="assets/cloudlogo.png" id="cloudlogoblack" alt="soundcloud">
+    </a>
+    <a href="https://open.spotify.com/album/77nG35CfzYAPCWEnJqZyg6" target="_blank">
+        <img src="assets/spotylogo.png" id="spotyblack" alt="spotify">
+    </a>
+    <img src="assets/blackie.png" id="blackiepng">
+    
+    <img src="assets/blackiename.png" id="blackiename">
+    
+  </div>
+  <div class="overlay" id="alexisOverlay">
+    <a href="https://www.instagram.com/alexis_hope/?hl=en" target="_blank">
+        <img src="assets/insta.png" id="instaalexis" alt="instagram">
+    </a>
+  
+   <a href="https://www.instagram.com/reel/DGfU59xxUd3/" target="_blank">
+        <img src="assets/dbl.png" id="dbl" alt="doublebitch">
+    </a>
+    <img src="assets/alexisgif.gif" id="alexisgif">
+     <img src="assets/alexisname.png" id="alexisname">
+  </div>
+
+
+  <div class="overlay" id="longOverlay">
+
+     <img src="assets/mattname.png" id="mattname">
+ 
+    <a href="https://open.spotify.com/artist/3m54fBYplhHrnYEvwNyS99" target="_blank">
+        <img src="assets/spotylogo.png" id="spotylong" alt="spotify">
+    </a>
+
+    <a href="https://www.instagram.com/daikon_html/" target="_blank">
+        <img src="assets/insta.png" id="instalong">
+    </a>
+    <img src="assets/longoria.png" id="longpng">
+
+  </div>
+  <div class="overlay" id="nateOverlay">
+    <img src="assets/natename.png" id="natename">
+    <a href="https://www.instagram.com/nateportermusic/?hl=en" target="_blank">
+        <img src="assets/insta.png" id="instanate" alt="Instagram">
+    </a>
+   
+    <img src="assets/nate.gif" id="nategif">
+
+  </div>
+  <div class="overlay" id="prestinOverlay">
+    <a href="https://www.instagram.com/prestinmyles/?hl=en" target="_blank">
+        <img src="assets/prestonbutton.png" id="instaprestin" alt="Instagram">
+    </a>
+    <a href="https://flowerchildcoffee.com/" target="_blank">
+        <img src="assets/flowerchild.png" id="flowerchild" alt="coffee">
+    </a>
+     <img id="prestin"  src="assets/prestin.gif">
+  >
+     
+    
+   
+
+  </div>
+  <div class="overlay" id="andrewOverlay">
+    <a href="https://andrewpitrone.com" target="_blank">
+        <img src="assets/andrewname.png" id="andrewname"> 
+    </a>
+
+    <a href="https://www.instagram.com/artistsconception" target="_blank">
+        <img src="assets/insta.png" id="andrewinsta"> 
+    </a>
+    
+    <img src="assets/andrew.png" id="andrewpng">
+  </div>
+
+  <div class="overlay" id="franzOverlay">
+    <a href="https://www.tiktok.com/@studiofliege" target="_blank">
+        <img src="assets/tik.png" id="franztik"> 
+    </a>
+   
+    <img src="assets/franzname.png" id="franzname">
+    <img src="assets/franz.png" id="franzpng">
+    <a href="https://www.instagram.com/uberfliege" target="_blank">
+        <img src="assets/insta.png" id="franzinsta"> 
+    </a>
+  </div>
+
+  <div class="overlay" id="sommerOverlay">
+    
+    
+    <img src="assets/somername.png" id="somername">
+    <img src="assets/sommer.png" id="sommerpng">
+    <a href="https://www.instagram.com/daikon_htmlswife/" target="_blank">
+        <img src="assets/insta.png" id="sommerinsta"> 
+    </a>
+
+    <a href="https://thepaintingbunny.com" target="_blank">
+        <img src="assets/bunny.png" id="bunny"> 
+    </a>
+  </div>
+
+
+  <div class="overlay" id="robOverlay">
+    
+    
+    <img src="assets/rocketrob.png" id="robname">
+    <img src="assets/rob.png" id="robpng">
+    <a href="https://www.instagram.com/magicalsands/" target="_blank">
+        <img src="assets/insta.png" id="robinsta"> 
+    </a>
+
+    <a href="https://www.instagram.com/vessel_ie/" target="_blank">
+        <img src="assets/vessel.png" id="vessel"> 
+    </a>
+  </div>
+
+  
+  <div class="overlay" id="derrikOverlay">
+    
+    
+    <img src="assets/derrikname.png" id="derrikname">
+    <img src="assets/derrik.png" id="derrikpng">
+    <a href="https://www.instagram.com/commondisguise/" target="_blank">
+        <img src="assets/insta.png" id="derrikinsta"> 
+    </a>
+
+  
+  </div>
+
+  <div class="overlay" id="connorOverlay">
+    
+    
+    <img src="assets/connername.png" id="connorname">
+    <img src="assets/connor.png" id="connorpng">
+    <a href="https://www.instagram.com/apothecary_earth/" target="_blank">
+        <img src="assets/insta.png" id="connorinsta"> 
+    </a>
+
+  
+  </div>
+
+    <div class="overlay" id="mehmeiOverlay">
+    
+    
+    <img src="assets/mehmeiname.png" id="mehmeiname">
+    <img src="assets/mehmei.png" id="mehmeipng">
+    <a href="https://www.instagram.com/heartofsong/" target="_blank">
+        <img src="assets/insta.png" id="mehmeiinsta"> 
+    </a>
+
+  
+  </div>
+
+  <div class="overlay" id="melOverlay">
+    
+    
+    <img src="assets/melname.png" id="melname">
+    <img src="assets/mel.png" id="melpng">
+    <a href="https://www.instagram.com/melodia.del.amor/" target="_blank">
+        <img src="assets/insta.png" id="melinsta"> 
+    </a>
+
+  
+  </div>
+
+  <div class="overlay" id="andreOverlay">
+    
+    
+    <img src="assets/andrename.png" id="andrename">
+    <img src="assets/andre.png" id="andrepng">
+    <a href="https://www.instagram.com/andrelunaisatuna/" target="_blank">
+        <img src="assets/insta.png" id="andreinsta"> 
+    </a>
+
+  
+  </div>
+
+
+  <div class="overlay" id="forumOverlay">
+    
+    
+    <img src="assets/forumpng.png" id="forum">
+    
+
+  
+  </div>
+
+
+  <div class="overlay" id="robertoOverlay">
+    
+    <img src="assets/robertoname.png" id="robertoname">
+   <a href="https://www.instagram.com/robertoleongo/" target="_blank">
+        <img src="assets/insta.png" id="robertoinsta"> 
+    </a>
+    <img src="assets/roberto.gif" id="robertogif">
+    
+
+  
+  </div>
+
+  <div class="overlay" id="insanityOverlay">
+    <img src="assets/insanity2.jpg" id="insanity2">
+  </div>
+  <div class="overlay" id="cf2lOverlay">
+    <img src="assets/cf2l.jpg" id="cf2">
+  </div>
+  <div class="overlay" id="cf8Overlay">
+    <video controls src="assets/cf8.mp4" id="cf8">
+  </div>
+  <div class="overlay" id="cf9Overlay">
+    <img src="assets/cf9.jpg" id="cf9">
+  </div>
+  <div class="overlay" id="cf10Overlay">
+    <img src="assets/cf10.jpg" id="cf10">
+  </div>
+  <div class="overlay" id="cf11Overlay">
+    <img src="assets/cf11.jpg" id="cf11">
+  </div>
+  <div class="overlay" id="cf12Overlay">
+    <img src="assets/cf12.jpg" id="cf12">
+  </div>
+  <div class="overlay" id="cf13Overlay">
+    <img src="assets/cf13.jpg" id="cf13">
+  </div>
+   <div class="overlay" id="cf14Overlay">
+    <img src="assets/cf14.jpg" id="cf14">
+  </div>
+  <div class="overlay" id="cf15Overlay">
+    <img src="assets/cf15.jpg" id="cf15">
+  </div>
+  <div class="overlay" id="cf16Overlay">
+    <img src="assets/cf16.jpg" id="cf16">
+  </div>
+  <div class="overlay" id="cf17Overlay">
+    <img src="assets/cf17.jpg" id="cf17">
+  </div>
+  <div class="overlay" id="cf3Overlay">
+    <video controls src="assets/cf3.mp4" id="cf3">
+  </div>
+  <div class="overlay" id="cf4Overlay">
+    <video controls src="assets/cf4.mp4" id="cf4">
+  </div>
+  <div class="overlay" id="cf5Overlay">
+    <video controls src="assets/cf5.mp4" id="cf5">
+  </div>
+  <div class="overlay" id="cf6Overlay">
+    <video controls src="assets/cf6.mp4" id="cf6">
+  </div>
+  <div class="overlay" id="cf7Overlay">
+    <video controls src="assets/cf7.mp4" id="cf7">
+  </div>
+  <div class="overlay" id="cf18Overlay">
+    <video controls src="assets/cf18.mp4" id="cf18">
+  </div>
+  <div class="overlay" id="cf19Overlay">
+    <video controls src="assets/cf19.mp4" id="cf19">
+  </div>
+  <div class="overlay" id="cf20Overlay">
+    <video controls src="assets/cf20.m4v" id="cf20">
+  </div>
+
+
+
+  
+  <div id="overlay">
+  <img id="overlayImg" src="" />
+  </div>
+   
+
+</div>
+
+    
+
+    
+
+
+</div>
+<script>
+
+  
+
+const galleryButtons = document.querySelectorAll("[data-gallery]");
+const thumbSets = document.querySelectorAll(".thumbs");
+
+galleryButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.dataset.gallery;
+
+    thumbSets.forEach(set => set.classList.remove("active"));
+
+    document.getElementById("thumbs_" + id).classList.add("active");
+  });
+});
+
+ 
+
+
+let active = false;
+const fl1=document.getElementById("fl1");
+const flow=document.getElementById("flow1");
+const fl2=document.getElementById("fl2");
+const fl3=document.getElementById("fl3");
+const flow2=document.getElementById("flow2");
+const flow3=document.getElementById("flow3");
+const menu=document.getElementById("menu");
+const menu2=document.getElementById("menu2");
+const audio=document.getElementById("ambient");
+const menu3=document.getElementById("menu3");
+const tv = document.getElementById("tv");
+const musicToggle = document.getElementById("musicToggle");
+let musicOn = false;
+const bgVideo = document.getElementById("bgVideo");
+const enterGate = document.getElementById("enterGate");
+const enterButton = document.getElementById("enterButton");
+
+
+
+
+enterButton.addEventListener("click", () => {
+
+    /* start background video immediately */
+    bgVideo.src = "assets/bg.mp4";
+    bgVideo.play();
+
+    /* opening TV video */
+    tv.src = "assets/gstation2.mp4";
+    tv.muted = false;
+    tv.style.display = "block";
+    tv.play();
+
+    /* remove enter overlay */
+    enterGate.style.opacity = "0";
+
+    setTimeout(()=>{
+        enterGate.remove();
+    },1000);
+
+});
+
+bgVideo.addEventListener("canplay", () => {
+    bgVideo.classList.add("loaded");
+});
+
+
+const recordArrow = document.getElementById("arrow");
+const recordSlides = document.querySelectorAll("#records .record");
+
+let currentRecord = 0;
+
+/* One audio player for the entire record system */
+const recordAudio = new Audio();
+recordAudio.preload = "auto";
+
+
+function stopRecordAudio() {
+    recordAudio.pause();
+    recordAudio.currentTime = 0;
+    recordAudio.removeAttribute("src");
+    recordAudio.load();
+}
+
+
+function showRecord(index) {
+
+    /* Stop whatever record audio is currently playing */
+    stopRecordAudio();
+
+    /* Hide all records */
+    recordSlides.forEach(record => {
+        record.classList.remove("active");
+    });
+
+    /* Show selected record */
+    const record = recordSlides[index];
+
+    record.classList.add("active");
+
+    currentRecord = index;
+
+    /* Load audio belonging to this record */
+    const audioFile = record.dataset.audio;
+
+    if (audioFile) {
+
+        recordAudio.src = audioFile;
+
+        recordAudio.play().catch(error => {
+            console.log("Record audio waiting for user interaction:", error);
+        });
+    }
+}
+
+
+/* Next record */
+recordArrow.addEventListener("click", () => {
+
+    const nextRecord =
+        (currentRecord + 1) % recordSlides.length;
+
+    showRecord(nextRecord);
+
+});
+
+
+/* Default record */
+showRecord(0);
+
+const outlawVideo = document.getElementById("outlawVideo");
+const outlawCloseBtn = document.getElementById("outlawCloseBtn");
+
+function unloadOutlaw(){
+
+    if(!outlawVideo) return;
+
+    outlawVideo.pause();
+
+    // unload file from memory
+    outlawVideo.removeAttribute("src");
+    outlawVideo.load();
+
+    // hide video container
+    document.getElementById("outlawdiv").style.display = "none";
+}
+
+outlawCloseBtn.addEventListener("click", unloadOutlaw);
+
+
+
+function unloadTV() {
+    if (!tv) return;
+    tv.pause();              // stop playback
+    tv.removeAttribute("src"); // remove source
+    tv.load();               // force browser to unload it
+    tv.style.display = "none"; // optional: hide it visually
+}
+
+
+
+
+
+/* ---------- AUDIO SAFE START ---------- */
+document.body.addEventListener(
+    "pointerdown",
+    ()=>{
+        audio.volume = 0.6;
+    },
+    {once:true}
+);
+
+function unloadCarousel() {
+    if (!carousel.classList.contains("active")) return; // 👈 prevent unnecessary clearing
+
+    // Stop any playing video inside carousel
+    const videos = carousel.querySelectorAll("video");
+    videos.forEach(v => {
+        v.pause();
+        v.removeAttribute("src");
+        v.load();
+    });
+
+    // Clear media
+    const mediaLayer = document.getElementById("mediaLayer");
+    mediaLayer.innerHTML = "";
+
+    // Hide overlays
+    document.querySelectorAll(".overlay").forEach(o => {
+        o.style.display = "none";
+    });
+
+    // Hide carousel
+    carousel.classList.remove("active");
+
+    // Reset set
+    currentSet = [];
+    index = 0;
+}
+
+
+/* ---------- FL1 INTERACTION ---------- */
+fl1.addEventListener("pointerenter",()=>{
+    if(active) return;
+    fl1.src="assets/fl1a.gif";
+    flow.src="assets/flow.gif";
+    flow.classList.add("active");
+    
+});
+
+fl1.addEventListener("pointerleave",()=>{
+    if(active) return;
+    fl1.src="assets/fl1.gif";
+    
+    setTimeout(()=>flow.classList.remove("active"),300);
+    
+});
+fl1.addEventListener("click",()=>{
+    unloadTV();
+    unloadCarousel();   // <<< ADD THIS
+    closeAllMenus();
+    menu3.classList.add("active");
+});
+
+
+
+/* ---------- FL2 INTERACTION ---------- */
+fl2.addEventListener("pointerenter",()=>{
+    if(active) return;
+    fl2.src="assets/fl2.gif";
+    flow2.src="assets/gather.gif";
+    flow2.classList.add("active");
+    
+});
+
+fl2.addEventListener("pointerleave",()=>{
+    if(active) return;
+    fl2.src="assets/fl2.gif";
+    
+    setTimeout(()=>flow2.classList.remove("active"),300);
+    
+});
+
+fl2.addEventListener("click",()=>{
+
+    unloadTV();
+    unloadCarousel();
+
+    closeAllMenus();
+
+    menu2.classList.add("active");
+
+    
+});
+
+
+
+
+/* ---------- FL3 INTERACTION ---------- */
+fl3.addEventListener("pointerenter",()=>{
+    if(active) return;
+    fl3.src="assets/fl3.gif";
+    flow3.src="assets/gcache.gif";
+    flow3.classList.add("active");
+    
+});
+
+fl3.addEventListener("pointerleave",()=>{
+    if(active) return;
+    fl3.src="assets/fl3.gif";
+    
+    setTimeout(()=>flow3.classList.remove("active"),300);
+    
+});
+
+fl3.addEventListener("click",()=>{
+    unloadTV();
+    unloadCarousel();   // <<< ADD THIS
+    closeAllMenus();
+    menu.classList.add("active");
+    document.getElementById("thumbs_1").classList.add("active");
+});
+
+
+function closeAllMenus(){
+
+    menu.classList.remove("active");
+    menu2.classList.remove("active");
+    menu3.classList.remove("active");
+
+    
+}
+
+/* ---------- MUSIC TOGGLE ---------- */
+
+function enableMusic() {
+    audio.muted = false;
+    audio.volume = 0.6;
+
+    audio.play().then(() => {
+        musicOn = true;
+        musicToggle.classList.add("active");
+    }).catch(err => {
+        console.log("Audio play blocked:", err);
+    });
+}
+
+function disableMusic() {
+    audio.pause();
+    musicOn = false;
+    musicToggle.classList.remove("active");
+}
+
+musicToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    if (musicOn) {
+        disableMusic();
+    } else {
+        enableMusic();
+    }
+});
+
+/* ---------- CAROUSEL ---------- */
+
+const sets = {
+  
+  head: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_1b.png",
+
+    }
+  ],
+  believe: [
+    { 
+       
+      media: "", 
+      overlayImg: "assets/th1_2b.png",
+    }
+  ],
+  th1_2: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_3b.png"
+
+     }
+  ],
+    th1_4: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_4b.png"
+
+     }
+  ],
+      th1_5: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_5b.png"
+
+     }
+  ],
+        th1_6: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_6b.png"
+
+     }
+  ],
+        th1_7: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_7b.png"
+
+     }
+  ],
+          th1_8: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_8b.png"
+
+     }
+  ],
+          th1_9: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_9b.png"
+     }
+  ],
+          th1_10: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_10b.png"
+
+     }
+  ],
+          th1_11: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_11b.png"
+
+     }
+  ],
+          th1_12: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_12b.png"
+
+     }
+  ],
+          th1_13: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_13b.png"
+
+     }
+  ],
+          th1_14: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_14b.png"
+
+     }
+  ],
+          th1_15: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_15b.png"
+
+     }
+  ],
+          th1_16: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_16b.png"
+
+     }
+  ],
+          th1_17: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_17b.png"
+
+     }
+  ],
+          th1_18: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th1_18b.png"
+
+     }
+  ],
+
+    th2_1: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_1b.png"
+
+     }
+  ],
+
+      th2_2: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_2b.png"
+
+     }
+  ],
+      th2_3: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_3b.png"
+
+     }
+  ],
+      th2_4: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_4b.png"
+
+     }
+  ],
+      th2_5: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_5b.png"
+
+     }
+  ],
+
+        th2_6: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_6b.png"
+
+     }
+  ],
+
+        th2_7: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_7b.png"
+
+     }
+  ],
+
+        th2_8: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_8b.png"
+
+     }
+  ],
+
+        th2_9: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_9b.png"
+
+     }
+  ], 
+          th2_10: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_10b.png"
+
+     }
+  ],   
+         th2_11: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_11b.png"
+
+     }
+  ],
+         th2_12: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_12b.png"
+
+     }
+  ],
+         th2_13: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_13b.png"
+
+     }
+  ],
+         th2_14: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_14b.png"
+
+     }
+  ], 
+         th2_15: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_15b.png"
+
+     }
+  ],
+         th2_16: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_16b.png"
+
+     }
+  ],
+  
+         th2_17: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_17b.png"
+
+     }
+  ],
+         th2_18: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th2_18b.png"
+
+     }
+  ],   
+
+
+         th3_1: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_1b.png"
+
+     }
+  ],  
+  
+         th3_2: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_2b.png"
+
+     }
+  ], 
+  
+         th3_3: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_3b.png"
+
+     }
+  ],   
+
+           th3_4: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_4b.png"
+
+     }
+  ],
+  
+           th3_5: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_5b.png"
+
+     }
+  ], 
+     
+           th3_6: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_6b.png"
+
+     }
+  ], 
+
+           th3_7: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_7b.png"
+
+     }
+  ], 
+
+           th3_8: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_8b.png"
+
+     }
+  ], 
+
+           th3_9: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_9b.png"
+
+     }
+  ], 
+
+           th3_10: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_10b.png"
+
+     }
+  ], 
+
+           th3_11: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_11b.png"
+
+     }
+  ], 
+
+             th3_12: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_12b.png"
+
+     }
+  ], 
+
+             th3_13: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_13b.png"
+
+     }
+  ], 
+
+             th3_14: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_14b.png"
+
+     }
+  ], 
+
+             th3_15: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_15b.png"
+
+     }
+  ], 
+
+             th3_16: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_16b.png"
+
+     }
+  ], 
+
+             th3_17: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_17b.png"
+
+     }
+  ], 
+     
+
+  th3_18: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th3_18b.png"
+
+     }
+  ], 
+     
+
+
+  th4_1: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_1b.png"
+
+     }
+  ], 
+
+  th4_2: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_2b.png"
+
+     }
+  ], 
+
+  th4_3: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_3b.png"
+
+     }
+  ], 
+
+  th4_4: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_4b.png"
+
+     }
+  ], 
+    
+  th4_5: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_5b.png"
+
+     }
+  ],
+  
+  th4_6: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_6b.png"
+
+     }
+  ], 
+
+  th4_7: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_7b.png"
+
+     }
+  ], 
+
+  th4_8: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_8b.png"
+
+     }
+  ], 
+
+  th4_9: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_9b.png"
+
+     }
+  ],
+  
+  th4_10: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_10b.png"
+
+     }
+  ], 
+     
+
+    th4_11: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_11b.png"
+
+     }
+  ], 
+
+    th4_12: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_12b.png"
+
+     }
+  ], 
+
+    th4_13: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_13b.png"
+
+     }
+  ], 
+
+    th4_14: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_14b.png"
+
+     }
+  ], 
+
+    th4_15: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_15b.png"
+
+     }
+  ], 
+    
+    th4_16: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_16b.png"
+
+     }
+  ], 
+
+    th4_17: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_17b.png"
+
+     }
+  ],
+    th4_18: [
+    { 
+       
+      media: "",
+      overlayImg: "assets/th4_18b.png"
+
+     }
+  ], 
+
+    cfth_1: [
+    { 
+       
+      media: "",
+      overlay: "insanityOverlay"
+
+     }
+  ], 
+    cfth_2: [
+    { 
+       
+      media: "",
+      overlay: "cf2lOverlay"
+
+     }
+  ],
+    cfth_3: [
+    { 
+       
+      media: "",
+      overlay: "cf3Overlay"
+
+     }
+  ],
+   cfth_4: [
+    { 
+       
+      media: "",
+      overlay: "cf4Overlay"
+
+     }
+  ],
+     cfth_5: [
+    { 
+       
+      media: "",
+      overlay: "cf5Overlay"
+
+     }
+  ],
+       cfth_6: [
+    { 
+       
+      media: "",
+      overlay: "cf6Overlay"
+
+     }
+  ],
+         cfth_7: [
+    { 
+       
+      media: "",
+      overlay: "cf7Overlay"
+
+     }
+  ],
+     cfth_8: [
+    { 
+       
+      media: "",
+      overlay: "cf8Overlay"
+
+     }
+  ],    cfth_9: [
+    { 
+       
+      media: "",
+      overlay: "cf9Overlay"
+
+     }
+  ],
+     cfth_10: [
+    { 
+       
+      media: "",
+      overlay: "cf10Overlay"
+
+     }
+  ],  
+    cfth_11: [
+    { 
+       
+      media: "",
+      overlay: "cf11Overlay"
+
+     }
+  ],  
+      cfth_12: [
+    { 
+       
+      media: "",
+      overlay: "cf12Overlay"
+
+     }
+  ], 
+        cfth_13: [
+    { 
+       
+      media: "",
+      overlay: "cf13Overlay"
+
+     }
+  ],       
+  cfth_14: [
+    { 
+       
+      media: "",
+      overlay: "cf14Overlay"
+
+     }
+  ],
+    cfth_15: [
+    { 
+       
+      media: "",
+      overlay: "cf15Overlay"
+
+     }
+  ], 
+     cfth_16: [
+    { 
+       
+      media: "",
+      overlay: "cf16Overlay"
+
+     }
+  ],  
+    cfth_17: [
+    { 
+       
+      media: "",
+      overlay: "cf17Overlay"
+
+     }
+  ],
+  cfth_18: [
+    { 
+       
+      media: "",
+      overlay: "cf18Overlay"
+
+     }
+  ],
+  cfth_19: [
+    { 
+       
+      media: "",
+      overlay: "cf19Overlay"
+
+     }
+  ],
+  cfth_20: [
+    { 
+       
+      media: "",
+      overlay: "cf20Overlay"
+
+     }
+  ],
+
+
+
+
+
+
+
+
+  blackie: [
+    { 
+    media: "",
+    overlay: "blackieOverlay",
+ }
+  ],
+  longoria: [
+    {  media: "", overlay:"longOverlay", }
+  ],
+  diaz: [
+    {
+      
+      media: "",
+      overlay: "diazOverlay",
+    }
+  ],
+  alexis: [
+    {
+     media: "",
+     overlay: "alexisOverlay", }
+  ],
+  jack: [
+    {  
+      media: "",
+      overlay: "jackOverlay",
+     }
+  ],
+    nate: [
+    { 
+      media: "",
+      overlay: "nateOverlay",
+     }
+  ],
+   
+      prestin: [
+    {  
+      media: "",
+      overlay: "prestinOverlay",
+     }
+  ],
+       andrew: [
+    {  
+      media: "",
+      overlay: "andrewOverlay",
+     }
+  ],
+
+   franz: [
+    {  
+      media: "",
+      overlay: "franzOverlay",
+     }
+  ],
+
+    sommer: [
+    {  
+      media: "",
+      overlay: "sommerOverlay",
+     }
+  ],
+
+   rob: [
+    {  
+      media: "",
+      overlay: "robOverlay",
+     }
+  ],
+
+    derrik: [
+    {  
+      media: "",
+      overlay: "derrikOverlay",
+     }
+  ],
+
+      connor: [
+    {  
+      media: "",
+      overlay: "connorOverlay",
+     }
+  ],
+
+        mehmei: [
+    {  
+      media: "",
+      overlay: "mehmeiOverlay",
+     }
+  ],
+
+          mel: [
+    {  
+      media: "",
+      overlay: "melOverlay",
+     }
+  ],
+
+          andre: [
+    {  
+      media: "",
+      overlay: "andreOverlay",
+     }
+  ],
+
+          forum: [
+    {  
+      media: "",
+      overlay: "forumOverlay",
+     }
+  ],
+
+          roberto: [
+    {  
+      media: "",
+      overlay: "robertoOverlay",
+     }
+  ],
+
+  th5_1: [{ media: "", overlayImg: "assets/th5_1b.png" }],
+  th5_2: [{ media: "", overlayImg: "assets/th5_2b.png" }],
+  th5_3: [{ media: "", overlayImg: "assets/th5_3b.png" }],
+  th5_4: [{ media: "", overlayImg: "assets/th5_4b.png" }],
+  th5_5: [{ media: "", overlayImg: "assets/th5_5b.png" }],
+  th5_6: [{ media: "", overlayImg: "assets/th5_6b.png" }],
+
+
+      menu3: [
+     { type: "image", media: "assets/gcache.png" }
+  ]
+
+
+ 
+
+  
+};
+
+
+
+let currentSet = [];
+let index = 0;
+const carousel = document.getElementById("carousel");
+const mediaLayer = document.getElementById("mediaLayer");
+
+document.querySelectorAll("[data-set]").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const key = btn.dataset.set;
+    if (!sets[key]) return;
+
+    currentSet = sets[key];
+    index = 0;
+
+    openCarousel();
+  });
+});
+
+function openCarousel(){
+  carousel.classList.add("active");
+  showItem();
+}
+
+function closeCarousel(){
+  carousel.classList.remove("active");
+  mediaLayer.innerHTML = "";
+  hideOverlays();
+}
+
+function showItem(){
+  mediaLayer.innerHTML = "";
+  document.querySelectorAll(".overlay").forEach(o=>{
+    o.classList.remove("active");
+    o.style.display = "none";
+});
+
+  const item = currentSet[index];
+
+if(item.media){
+
+    const img = document.createElement("img");
+
+    img.src = item.media;
+    img.className = "carousel-media";
+
+    img.style.position = "relative";
+    img.style.zIndex = "2";
+
+    mediaLayer.appendChild(img);
+}
+
+  // overlay image (art overlay)
+  if(item.overlayImg){
+    const overlayImg = document.createElement("img");
+    overlayImg.src = item.overlayImg;
+    overlayImg.className = "carousel-media";
+    overlayImg.style.position = "absolute";
+    overlayImg.style.left = "50%";
+    overlayImg.style.top = "50%";
+    overlayImg.style.transform = "translate(-50%, -50%)";
+    
+
+    overlayImg.style.maxWidth = "80vw";
+    overlayImg.style.maxHeight = "80vh";
+
+    overlayImg.style.objectFit = "contain";
+    overlayImg.style.zIndex = "5";
+    mediaLayer.appendChild(overlayImg);
+  }
+
+  // UI overlay (links/buttons)
+  if(item.overlay){
+    const el = document.getElementById(item.overlay);
+    if(el){
+   el.style.display = "flex";
+   el.classList.add("active");
+}
+  }
+}
+
+function hideOverlays(){
+  document.querySelectorAll(".overlay").forEach(o=>{
+    o.classList.remove("active");
+    o.style.display = "none";
+  });
+}
+
+carousel.addEventListener("click", (e)=>{
+  if(e.target === carousel){
+    closeCarousel();
+  }
+});
+
+document.addEventListener("keydown", (e)=>{
+  if(!carousel.classList.contains("active")) return;
+
+  if(e.key === "ArrowRight"){
+    index = (index + 1) % currentSet.length;
+    showItem();
+  }
+
+  if(e.key === "ArrowLeft"){
+    index = (index - 1 + currentSet.length) % currentSet.length;
+    showItem();
+  }
+
+  if(e.key === "Escape"){
+    closeCarousel();
+  }
+});
+
+
+
+
+
+
+
+
+
+/* ---------- DEEP LINK ---------- */
+const key = location.hash.replace("#", "");
+if (sets[key]) {
+    history.replaceState(null, "", "#" + key);
+    menu.classList.add("active");
+    set = sets[key];
+    show();
+    carousel.classList.add("active");
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
