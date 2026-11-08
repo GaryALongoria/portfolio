@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4e0b51">
+  <title>Gary A Longoria</title>
+  <style>
+    /* Mobile-first base styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: url("assets/bgimage.jpg") center / cover no-repeat;
+    }
+
+    body {
+      overflow: hidden;
+      
+    }
+
+    #enterGate{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:#520644;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      transition:opacity 1s ease;
+      }
+
+    #enterButton{
+      color:white;
+      font-size:22px;
+      letter-spacing:8px;
+      cursor:pointer;
+      opacity:.85;
+      scale: .6;
+      margin-top: -200px;
+
+      transition:all .6s ease;
+      }
+
+    #enterButton:hover{
+      opacity:1;
+      scale: .6;
+      transform:scale(1.1);
+      }
+
+    /* Full-screen stage that centers the complete flower composition */
+    #flower-home {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      
+    }
+
+    .flower-nav {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* All flowers live on one 600 x 600 design canvas. */
+    #flower-composition {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 600px;
+      height: 600px;
+      transform: translate(-50%, -50%) scale(var(--flower-scale, 0.5));
+      transform-origin: center center;
+    }
+
+    .flower {
+      position: absolute;
+      display: block;
+      width: 150px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .flower img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Animated overlays: each is positioned relative to its flower button. */
+    .flower-hover-overlay {
+      position: absolute;
+      z-index: 5;
+      display: block;
+      height: auto;
+      pointer-events: none;
+    }
+
+    /* Adjust these values independently to size and position each overlay. */
+
+#fl1 .flower-hover-overlay--head {
+  position: absolute;
+  width: 300%;
+  height: auto;
+
+  /* Adjust head placement here */
+  left: -300px;
+  top: -350px;
+
+  transform: rotate(230deg);
+  transform-origin: center center;
+
+  z-index: 5;
+  display: block;
+  pointer-events: none;
+}
+
+
+    #fl2 .flower-hover-overlay--gfolio {
+      width: 500%;
+      left: -450px;
+      top: 120px;
+      transform: rotate(235deg);
+      position: absolute;
+      z-index: 10;
+      
+      
+    }
+ 
+    #fl3 .flower-hover-overlay--gathering {
+      width: 350%;
+      left: -120px;
+      top: -160px;
+      transform: rotate(140deg);
+      position: absolute;
+      scale: 1.1;
+      z-index: 15;
+      
+      
+    }
+        #fl4 .flower-hover-overlay--goodies {
+      width: 350%;
+      left: -150px;
+      top: -100px;
+      transform: rotate(150deg);
+      position: absolute;
+      z-index: 15;
+      
+      
+    }    
+
+    .flower:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 5px;
+      border-radius: 50%;
+    }
+
+    /* Flower positions are coordinates on the shared design canvas. */
+    #fl1 { left: -40px; top: 150px;transform: rotate(130deg);scale:1.3;}
+    #fl2 { left: 130px; top: 220px;transform: rotate(160deg);scale:1.3; }
+    #fl3 { left: 180px; top: 450px; transform: rotate(220deg);scale:1.4; }
+    #fl4 { left: 10px; top: 700px;  transform: rotate(220deg);scale:1.4;}
+
+    #logo{
+      
+      scale: .5;
+      position: absolute;
+      left: -80px;
+      top: 300px;
+    }
+
+    #records {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: 0;
+      transform: translate(25%, 140%) scale(1.2);
+      transform-origin: center center;
+      z-index: 8000;
+    }
+
+    /* One clickable record, occupying the original icon's position. */
+    #recordToggle {
+      display: block;
+      position: relative;
+      width: 150px;
+      height: 150px;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    #recordToggle .record-disc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    #recordTitleGif {
+      position: absolute;
+      width: 150px;
+      max-width: none;
+      height: auto;
+      left: 50%;
+      bottom: 10%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    #recordTitleGif[hidden] { display: none; }
+    #recordToggle:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+
+    /* Larger screens scale the entire composition, not individual flowers. */
+    @media (min-width: 768px) {
+      #flower-composition {
+        --flower-scale: 0.9;
+      }
+    }
+
+    /* Slightly smaller phones get a little more breathing room. */
+    @media (max-width: 360px) {
+      #flower-composition {
+        --flower-scale: 0.46;
+      }
+    }
+
+    /* Head Dress gallery: independent scrolling layer, without changing the flower canvas. */
+    #headDressGallery[hidden] { display: none !important; }
+    #headDressGallery {
+      position: fixed; inset: 0; z-index: 9000;
+      
+      display: flex; flex-direction: column;
+    }
+    .head-dress-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 12px 18px;
+      padding-top: max(12px, env(safe-area-inset-top));
+      flex-shrink: 0;
+    }
+    .head-dress-bar h2 { margin: 0; font: 500 16px/1.4 system-ui,sans-serif; letter-spacing: .18em; }
+    #closeHeadDress { color: #fff; border: 1px solid #aaa; background: transparent;
+      border-radius: 50%; width: 42px; height: 42px; font: 28px/1 system-ui,sans-serif;
+      cursor: pointer; flex-shrink: 0; }
+    #headDressScroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch; padding: 20px 16px max(40px,env(safe-area-inset-bottom)); }
+    .head-dress-piece { width: min(100%, 720px); margin: 0 auto 34px; }
+    .head-dress-piece video, .head-dress-piece img {
+      display: block; max-width: 100%; width: 100%; height: auto; max-height: 78dvh;
+      object-fit: contain; background: #1d1621;
+    }
+    .head-dress-piece figcaption { margin-top: 9px; font: 12px/1.4 system-ui,sans-serif;
+      letter-spacing: .12em; text-align: center; color: #d6cad8; }
+    body.head-dress-open { overflow: hidden; }
+
+    /* Gary's Portfolio: separate lightweight, vertically scrolling image gallery. */
+    #portfolioGallery[hidden] { display: none !important; }
+    #portfolioGallery { position: fixed; inset: 0; z-index: 9000; display: flex; flex-direction: column; }
+    .portfolio-bar { display: flex; align-items: center; justify-content: flex-end; padding: 12px 18px; padding-top: max(12px,env(safe-area-inset-top)); flex-shrink: 0; }
+    #closePortfolio { color: #fff; border: 1px solid #aaa; background: transparent; border-radius: 50%; width: 42px; height: 42px; font: 28px/1 system-ui,sans-serif; cursor: pointer; }
+    #portfolioScroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 20px 16px max(40px,env(safe-area-inset-bottom)); }
+    .portfolio-piece { width: min(100%,720px); margin: 0 auto 34px; }
+    .portfolio-piece img { display: block; max-width: 100%; width: 100%; height: auto; max-height: 78dvh; object-fit: contain; }
+    body.portfolio-open { overflow: hidden; }
+
+    /* G's Goodies: same gallery presentation as the existing collections. */
+    #goodiesGallery[hidden] { display: none !important; }
+    #goodiesGallery { position: fixed; inset: 0; z-index: 9000; display: flex; flex-direction: column; }
+    .goodies-bar { display: flex; align-items: center; justify-content: flex-end; padding: 12px 18px; padding-top: max(12px,env(safe-area-inset-top)); flex-shrink: 0; }
+    #closeGoodies { color: #fff; border: 1px solid #aaa; background: transparent; border-radius: 50%; width: 42px; height: 42px; font: 28px/1 system-ui,sans-serif; cursor: pointer; }
+    #goodiesScroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 20px 16px max(40px,env(safe-area-inset-bottom)); }
+    .goodies-piece { width: min(100%,720px); margin: 0 auto 34px; }
+    .goodies-piece img, .goodies-piece video { display: block; width: 100%; height: auto; max-height: 78dvh; object-fit: contain; }
+    body.goodies-open { overflow: hidden; }
+  </style>
+</head>
+<body>
+
+  <div id="enterGate">
+    <div id="enterButton">
+      <img src="assets/garyenterlogo.gif" id="garyenterlogo" loading="eager" decoding="async">
+    </div>
+  </div>  
+  <main id="flower-home">
+    <nav class="flower-nav" aria-label="Main navigation">
+      <div id="flower-composition">
+        <button class="flower" id="fl1" type="button" aria-label="Open section one">
+          <img src="assets/fl.4.gif" alt="">
+        </button>
+        <button class="flower" id="fl2" type="button" aria-label="Open section two">
+          <img src="assets/fl.2.gif" alt="">
+        </button>
+        <button class="flower" id="fl3" type="button" aria-label="Open section three">
+          <img src="assets/fl.3.gif" alt="">
+        </button>
+        <button class="flower" id="fl4" type="button" aria-label="Open section four">
+          <img src="assets/fl.1.gif" alt="">
+        </button>
+      </div>
+    </nav>
+
+    <div id="records" aria-label="Record player">
+      <button id="recordToggle" type="button" aria-label="Play first record">
+        <img id="recordDisc" class="record-disc" src="assets/record1.png" alt="Default record" loading="eager" decoding="async">
+        <img id="recordTitleGif" src="" alt="" hidden aria-hidden="true">
+      </button>
+      <audio id="recordAudio" preload="none"></audio>
+    </div>
+
+    <img id="logo" src="assets/logo.png">
+  </main>
+  <section id="goodiesGallery" role="dialog" aria-modal="true" aria-label="G's Goodies gallery" hidden>
+    <header class="goodies-bar"><button id="closeGoodies" type="button" aria-label="Close Goodies gallery">×</button></header>
+    <div id="goodiesScroll" tabindex="0" aria-label="Scroll Goodies artwork">
+      <figure class="goodies-piece"><img src="assets/good1.jpg" alt="Goodies artwork 1" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><video class="goodies-video" aria-label="Goodies video 2" muted loop controls playsinline preload="none" data-src="assets/good2.mp4"></video></figure>
+      <figure class="goodies-piece"><video class="goodies-video" aria-label="Goodies video 3" muted loop controls playsinline preload="none" data-src="assets/good3.mp4"></video></figure>
+      <figure class="goodies-piece"><video class="goodies-video" aria-label="Goodies video 4" muted loop controls playsinline preload="none" data-src="assets/good4.mp4"></video></figure>
+      <figure class="goodies-piece"><video class="goodies-video" aria-label="Goodies video 5" muted loop controls playsinline preload="none" data-src="assets/good5.mp4"></video></figure>
+      <figure class="goodies-piece"><img src="assets/good6.jpg" alt="Goodies artwork 6" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><img src="assets/good7.jpg" alt="Goodies artwork 7" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><img src="assets/good8.png" alt="Goodies artwork 8" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><img src="assets/good9.png" alt="Goodies artwork 9" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><img src="assets/good10.jpg" alt="Goodies artwork 10" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><img src="assets/good11.jpg" alt="Goodies artwork 11" loading="lazy" decoding="async"></figure>
+      <figure class="goodies-piece"><video class="goodies-video" aria-label="Goodies video 12" controls playsinline preload="none" data-src="assets/good12.mp4"></video></figure>
+    </div>
+  </section>
+  <section id="portfolioGallery" role="dialog" aria-modal="true" aria-label="Gary's Portfolio gallery" hidden>
+    <header class="portfolio-bar"><button id="closePortfolio" type="button" aria-label="Close Gary's Portfolio">×</button></header>
+    <div id="portfolioScroll" tabindex="0" aria-label="Scroll Gary's portfolio artwork">
+      <figure class="portfolio-piece"><img src="assets/pp1.jpg" alt="Gary portfolio photograph 1" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp2.jpg" alt="Gary portfolio photograph 2" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp3.jpg" alt="Gary portfolio photograph 3" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp4.jpg" alt="Gary portfolio photograph 4" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp5.jpg" alt="Gary portfolio photograph 5" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp6.jpg" alt="Gary portfolio photograph 6" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp7.jpg" alt="Gary portfolio photograph 7" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp8.jpg" alt="Gary portfolio photograph 8" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp9.jpg" alt="Gary portfolio photograph 9" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp10.jpg" alt="Gary portfolio photograph 10" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp11.jpg" alt="Gary portfolio photograph 11" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp12.jpg" alt="Gary portfolio photograph 12" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp13.jpg" alt="Gary portfolio photograph 13" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp14.jpg" alt="Gary portfolio photograph 14" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp15.jpg" alt="Gary portfolio photograph 15" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp16.jpg" alt="Gary portfolio photograph 16" loading="lazy" decoding="async"></figure>
+      <figure class="portfolio-piece"><img src="assets/pp17.jpg" alt="Gary portfolio photograph 17" loading="lazy" decoding="async"></figure>
+    </div>
+  </section>
+  <section id="headDressGallery" role="dialog" aria-modal="true" aria-label="Head Dress gallery" hidden>
+    <header class="head-dress-bar">
+      
+      <button id="closeHeadDress" type="button" aria-label="Close Head Dress gallery">×</button>
+    </header>
+    <div id="headDressScroll" tabindex="0" aria-label="Scroll Head Dress artwork">
+      <figure class="head-dress-piece">
+        <video class="head-dress-video" muted loop playsinline preload="none" controls aria-label="Head Dress video 1" data-src="assets/hd1.mp4"></video>
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <video class="head-dress-video" muted loop playsinline preload="none" controls aria-label="Head Dress video 2" data-src="assets/hd2.mp4"></video>
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <video class="head-dress-video" muted loop playsinline preload="none" controls aria-label="Head Dress video 3" data-src="assets/hd3.mp4"></video>
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <video class="head-dress-video" muted loop playsinline preload="none" controls aria-label="Head Dress video 4" data-src="assets/hd4.mp4"></video>
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp1.jpg" alt="Head Dress photograph 1" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp2.jpg" alt="Head Dress photograph 2" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp3.jpg" alt="Head Dress photograph 3" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp4.jpg" alt="Head Dress photograph 4" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp5.jpg" alt="Head Dress photograph 5" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp6.jpg" alt="Head Dress photograph 6" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp7.jpg" alt="Head Dress photograph 7" loading="lazy" decoding="async">
+        
+      </figure>
+      <figure class="head-dress-piece">
+        <img src="assets/hdp8.jpg" alt="Head Dress photograph 8" loading="lazy" decoding="async">
+        
+      </figure>
+    </div>
+  </section>
+  <script>
+
+    let active = false;
+    const enterGate = document.getElementById("enterGate");
+    const enterButton = document.getElementById("enterButton");
+
+    enterButton.addEventListener("click", () => {
+      /* remove enter overlay */
+      enterGate.style.opacity = "0";
+      setTimeout(() => enterGate.remove(), 1000);
+    });
+
+    /* Hover overlays for the two flowers. The flower GIF restarts on entry;
+       the overlay is removed on exit so its animation unloads. */
+    function attachFlowerOverlay(buttonId, gifPath, overlayClass) {
+      const flowerButton = document.getElementById(buttonId);
+      if (!flowerButton) return;
+
+      let overlay = null;
+
+      function restartFlowerGif() {
+        const flowerGif = flowerButton.querySelector("img");
+        if (!flowerGif) return;
+        const originalSrc = flowerGif.src;
+        flowerGif.src = "";
+        flowerGif.src = originalSrc;
+      }
+
+      function showOverlay() {
+        if (overlay) return;
+        overlay = document.createElement("img");
+        overlay.src = gifPath;
+        overlay.alt = "";
+        overlay.className = `flower-hover-overlay ${overlayClass}`;
+        overlay.setAttribute("aria-hidden", "true");
+        flowerButton.appendChild(overlay);
+      }
+
+      function removeOverlay() {
+        if (!overlay) return;
+        overlay.removeAttribute("src");
+        overlay.remove();
+        overlay = null;
+      }
+
+      flowerButton.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "mouse") {
+          restartFlowerGif();
+          showOverlay();
+        }
+      });
+      flowerButton.addEventListener("pointerleave", (event) => {
+        if (event.pointerType === "mouse") removeOverlay();
+      });
+      flowerButton.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "mouse") {
+          restartFlowerGif();
+          showOverlay();
+        }
+      });
+      ["pointerup", "pointercancel"].forEach((eventName) => {
+        flowerButton.addEventListener(eventName, (event) => {
+          if (event.pointerType !== "mouse") removeOverlay();
+        });
+      });
+      window.addEventListener("blur", removeOverlay);
+    }
+
+    attachFlowerOverlay("fl1", "assets/head.gif", "flower-hover-overlay--head");
+    attachFlowerOverlay("fl2", "assets/gfolio.gif", "flower-hover-overlay--gfolio");
+    attachFlowerOverlay("fl3", "assets/gathering.gif", "flower-hover-overlay--gathering");
+    attachFlowerOverlay("fl4", "assets/goodies.gif", "flower-hover-overlay--goodies");
+
+    // Click the displayed record to advance; after the final song return to default.
+    // The default image is silent, and each selected record plays its own audio.
+    const recordToggle = document.getElementById("recordToggle");
+    const recordDisc = document.getElementById("recordDisc");
+    const recordTitleGif = document.getElementById("recordTitleGif");
+    const recordAudio = document.getElementById("recordAudio");
+    const recordTracks = [
+      { title: "Prison", disc: "record8.gif", gif: "prison.gif", audio: "prison.mp3" },
+      { title: "Hard Livin'", disc: "record2.gif", gif: "hardlivin.gif", audio: "hardlivin.mp3" },
+      { title: "Don't Come", disc: "record3.gif", gif: "dontcome.gif", audio: "dontcome.mp3" },
+      { title: "Move to LA", disc: "record4.gif", gif: "move.gif", audio: "movetola.mp3" },
+      { title: "Outlaw Man", disc: "record5.gif", gif: "outlaw.gif", audio: "outlawman.mp3" },
+      { title: "Outside of Time", disc: "record6.gif", gif: "outside.gif", audio: "outside.mp3" },
+      { title: "Christmas", disc: "record2.gif", gif: "xmas.gif", audio: "xmas.mp3" },
+      { title: "Maria Balloon", disc: "record7.gif", gif: "maria.gif", audio: "maria.mp3" },
+      { title: "Rainbow of Fire", disc: "record8.gif", gif: "rainbow.gif", audio: "rainbow.mp3" }
+    ];
+    let currentRecordIndex = -1; // -1 is the silent default record.
+
+    function showRecord(index) {
+      recordAudio.pause();
+      recordAudio.removeAttribute("src");
+      recordAudio.load();
+      currentRecordIndex = index;
+      if (index === -1) {
+        recordDisc.src = "assets/record1.png";
+        recordDisc.alt = "Default record";
+        recordTitleGif.hidden = true;
+        recordTitleGif.removeAttribute("src");
+        recordToggle.setAttribute("aria-label", "Play first record");
+        return;
+      }
+      const track = recordTracks[index];
+      recordDisc.src = "assets/" + track.disc;
+      recordDisc.alt = track.title + " record";
+      recordTitleGif.src = "assets/" + track.gif;
+      recordTitleGif.hidden = false;
+      recordToggle.setAttribute("aria-label", track.title + "; click for next record");
+      recordAudio.src = "assets/" + track.audio;
+      recordAudio.load();
+      const request = recordAudio.play();
+      if (request && typeof request.catch === "function") {
+        request.catch(error => console.warn("Audio playback unavailable:", error));
+      }
+    }
+
+    recordToggle.addEventListener("click", () => {
+      const next = currentRecordIndex + 1;
+      showRecord(next >= recordTracks.length ? -1 : next);
+    });
+
+
+    // Head Dress opens from #fl1; videos are requested only near the viewport.
+    const headDressGallery = document.getElementById("headDressGallery");
+    const headDressScroll = document.getElementById("headDressScroll");
+    const closeHeadDress = document.getElementById("closeHeadDress");
+    const headDressVideos = [...headDressGallery.querySelectorAll(".head-dress-video")];
+    let headDressObserver = null;
+    let headDressPreviousFocus = null;
+
+    function pauseHeadDressVideos() {
+      headDressVideos.forEach(video => video.pause());
+    }
+    function openHeadDressGallery() {
+      headDressPreviousFocus = document.activeElement;
+      headDressGallery.hidden = false;
+      document.body.classList.add("head-dress-open");
+      headDressScroll.scrollTop = 0;
+      if (headDressObserver) headDressObserver.disconnect();
+      headDressObserver = new IntersectionObserver(entries => {
+        entries.forEach(({target: video, isIntersecting, intersectionRatio}) => {
+          if (isIntersecting && intersectionRatio >= 0.45) {
+            if (!video.getAttribute("src")) {
+              video.src = video.dataset.src;
+              video.load();
+            }
+            const playback = video.play();
+            if (playback && playback.catch) playback.catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, {root: headDressScroll, threshold: [0, 0.45, 0.75]});
+      headDressVideos.forEach(video => headDressObserver.observe(video));
+      closeHeadDress.focus();
+    }
+    function closeHeadDressGallery() {
+      pauseHeadDressVideos();
+      if (headDressObserver) { headDressObserver.disconnect(); headDressObserver = null; }
+      headDressGallery.hidden = true;
+      document.body.classList.remove("head-dress-open");
+      if (headDressPreviousFocus && headDressPreviousFocus.focus) headDressPreviousFocus.focus();
+    }
+    document.getElementById("fl1").addEventListener("click", openHeadDressGallery);
+    closeHeadDress.addEventListener("click", closeHeadDressGallery);
+    document.addEventListener("keydown", event => {
+      if (!headDressGallery.hidden && event.key === "Escape") closeHeadDressGallery();
+      if (!headDressGallery.hidden && event.key === "Tab") {
+        // Keep keyboard focus within the modal while it is open.
+        const focusables = [closeHeadDress, headDressScroll, ...headDressVideos];
+        const current = focusables.indexOf(document.activeElement);
+        if (event.shiftKey && current <= 0) { event.preventDefault(); focusables[focusables.length - 1].focus(); }
+        else if (!event.shiftKey && current === focusables.length - 1) { event.preventDefault(); closeHeadDress.focus(); }
+      }
+    });
+
+    // Gary's Portfolio: photos load lazily; the record player's music is untouched.
+    const portfolioGallery = document.getElementById("portfolioGallery");
+    const portfolioScroll = document.getElementById("portfolioScroll");
+    const closePortfolio = document.getElementById("closePortfolio");
+    let portfolioPreviousFocus = null;
+    function openPortfolioGallery() {
+      portfolioPreviousFocus = document.activeElement;
+      portfolioGallery.hidden = false;
+      document.body.classList.add("portfolio-open");
+      portfolioScroll.scrollTop = 0;
+      closePortfolio.focus();
+    }
+    function closePortfolioGallery() {
+      portfolioGallery.hidden = true;
+      document.body.classList.remove("portfolio-open");
+      if (portfolioPreviousFocus && portfolioPreviousFocus.focus) portfolioPreviousFocus.focus();
+    }
+    document.getElementById("fl2").addEventListener("click", openPortfolioGallery);
+    closePortfolio.addEventListener("click", closePortfolioGallery);
+    document.addEventListener("keydown", event => {
+      if (portfolioGallery.hidden) return;
+      if (event.key === "Escape") { closePortfolioGallery(); return; }
+      if (event.key === "Tab") {
+        const focusables = [closePortfolio, portfolioScroll];
+        const current = focusables.indexOf(document.activeElement);
+        if (event.shiftKey && current <= 0) { event.preventDefault(); portfolioScroll.focus(); }
+        else if (!event.shiftKey && current === focusables.length - 1) { event.preventDefault(); closePortfolio.focus(); }
+      }
+    });
+
+    // Goodies videos are lazy-loaded; only the visible video plays.
+    // good12 has sound. Its playback temporarily pauses (not resets) record audio.
+    const goodiesGallery = document.getElementById("goodiesGallery");
+    const goodiesScroll = document.getElementById("goodiesScroll");
+    const closeGoodies = document.getElementById("closeGoodies");
+    const goodiesVideos = [...goodiesGallery.querySelectorAll(".goodies-video")];
+    const good12 = goodiesGallery.querySelector('[data-src="assets/good12.mp4"]');
+    let goodiesObserver = null;
+    let goodiesPreviousFocus = null;
+    let resumeRecordAfterGood12 = false;
+    let pausedRecordSource = null;
+
+    function restoreGoodiesRecord() {
+      if (!resumeRecordAfterGood12) return;
+      resumeRecordAfterGood12 = false;
+      if (recordAudio.getAttribute("src") === pausedRecordSource && recordAudio.paused) {
+        const playback = recordAudio.play();
+        if (playback && playback.catch) playback.catch(() => {});
+      }
+      pausedRecordSource = null;
+    }
+    good12.addEventListener("play", () => {
+      if (!recordAudio.paused) {
+        resumeRecordAfterGood12 = true;
+        pausedRecordSource = recordAudio.getAttribute("src");
+        recordAudio.pause();
+      }
+    });
+    good12.addEventListener("pause", restoreGoodiesRecord);
+    good12.addEventListener("ended", restoreGoodiesRecord);
+
+    function openGoodiesGallery() {
+      goodiesPreviousFocus = document.activeElement;
+      goodiesGallery.hidden = false;
+      document.body.classList.add("goodies-open");
+      goodiesScroll.scrollTop = 0;
+      if (goodiesObserver) goodiesObserver.disconnect();
+      goodiesObserver = new IntersectionObserver(entries => {
+        entries.forEach(({target: video, isIntersecting, intersectionRatio}) => {
+          if (isIntersecting && intersectionRatio >= 0.45) {
+            if (!video.getAttribute("src")) { video.src = video.dataset.src; video.load(); }
+            // Browsers can block unmuted autoplay: good12 always has a Play control.
+            const playback = video.play();
+            if (playback && playback.catch) playback.catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, {root: goodiesScroll, threshold: [0, 0.45, 0.75]});
+      goodiesVideos.forEach(video => goodiesObserver.observe(video));
+      closeGoodies.focus();
+    }
+    function closeGoodiesGallery() {
+      goodiesVideos.forEach(video => video.pause());
+      restoreGoodiesRecord();
+      if (goodiesObserver) { goodiesObserver.disconnect(); goodiesObserver = null; }
+      goodiesGallery.hidden = true;
+      document.body.classList.remove("goodies-open");
+      if (goodiesPreviousFocus && goodiesPreviousFocus.focus) goodiesPreviousFocus.focus();
+    }
+    document.getElementById("fl4").addEventListener("click", openGoodiesGallery);
+    closeGoodies.addEventListener("click", closeGoodiesGallery);
+    document.addEventListener("keydown", event => {
+      if (goodiesGallery.hidden) return;
+      if (event.key === "Escape") { closeGoodiesGallery(); return; }
+      if (event.key === "Tab") {
+        const focusables = [closeGoodies, goodiesScroll, ...goodiesVideos];
+        const current = focusables.indexOf(document.activeElement);
+        if (event.shiftKey && current <= 0) { event.preventDefault(); focusables[focusables.length - 1].focus(); }
+        else if (!event.shiftKey && current === focusables.length - 1) { event.preventDefault(); closeGoodies.focus(); }
+      }
+    });
+  </script>
+</body>
+</html>
